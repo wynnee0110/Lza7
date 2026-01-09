@@ -7,11 +7,11 @@ export const projects = [
     link: "https://intrasyss.vercel.app/",
   },
   {
-    title: "ShopEase - E-commerce Store",
-    description: "An online store app with React, Redux, and Stripe integration.",
-    description2: "Features include product listings, shopping cart, and checkout.",
-    languages: ["React", "Redux", "Stripe API"],
-    link: "https://example.com/store",
+    title: "OLLO AI",
+    description: "A powerful AI platform built to help you think smarter, work faster, and solve problems with ease. Designed to support learning, creativity, and productivity through intelligent, reliable assistance.",
+    description2: "Features include Multi-Purpose AI, Task Assistance, Idea Generation",
+    languages: ["React", "Typescript", "Gemini","FastAPI"],
+    link: "https://ollo-ai-seven.vercel.app/",
   },
 
   {
