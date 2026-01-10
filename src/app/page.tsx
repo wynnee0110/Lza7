@@ -62,12 +62,12 @@ export default function HomePage() {
         </div>
       </section>
       
-      <section id="about" className="w-full flex justify-center items-center sm:p-30 sm:py-20 sm:mt-20">
+      <section id="about" className=" w-full flex justify-center items-center sm:p-50 sm:py-20 sm:mt-20 lg:p-50 xl:p-50">
         <div className="w-full max-w-6xl flex flex-col sm:flex-row justify-between gap-2 px-10 ">
           {/* LEFT SIDE — TEXT */}
           <div className="flex-1 min-w-0">
-            <h2 className="text-3xl sm:text-5xl font-bold mb-4 text-gray-500">.about me</h2>
-            <p className="text-gray-300 text-md sm:text-base leading-relaxed px-4">
+            <h2 className="text-3xl sm:text-md font-bold mb-4 text-gray-500 ml-4">About me</h2>
+            <p className="text-gray-300 text-md sm:text-base leading-relaxed px-4 ">
               I&apos;m just a tech enthusiast who loves building cool stuff and figuring out how things work.  
               I spend most of my time coding little projects, experimenting with new tools, or just playing around 
               with ideas that come to mind.  
@@ -114,11 +114,11 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section id="projects" className="bg-black-100 flex justify-center sm:p-30 mt-[-90px]">
+      <section id="projects" className="bg-black-100 flex justify-center sm:p-50 sm:mt-[-190px]">
         <div className="w-full max-w-6xl px-4 sm:px-10 py-8">
           <div className="flex items-center gap-4 mb-5 w-full">
-            <h2 className="text-3xl sm:text-5xl text-gray-500 font-bold">
-              .projects
+            <h2 className="text-3xl sm:text-md text-gray-500 font-bold ml-5 sm:mb-[-15px]"> 
+              Projects
             </h2>
           </div>
           <div className="">  
@@ -127,7 +127,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="w-full py-0 sm:mb-20 flex flex-col items-center text-center">
+      <section className="w-full sm:py-0 py-20 sm:mb-20 flex flex-col items-center text-center sm:mt-[-100px]">
         <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
           Let&apos;s build something great together.
         </h2>
