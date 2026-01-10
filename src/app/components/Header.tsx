@@ -3,6 +3,7 @@
 import { useRouter } from "next/navigation";
 import Atom3D from "./Atom3D";
 import { useState, useEffect } from "react";
+import DarkModeToggle from "./DarkModeToggle";
 
 export default function Header() {
   const router = useRouter();
@@ -19,13 +20,19 @@ export default function Header() {
       {/* Logo (Atom3D) clickable */}
       <button
         onClick={() => router.push("/")}
-        className="relative bottom-1 w-[100px] h-[100px] hover:opacity-80 transition-opacity"
+        className="relative bottom-1 w-[100px] h-[100px] hover:opacity-80 transition-opacity mt-3"
         aria-label="Home"
       >
         <Atom3D />
         
       </button>
-      <div className="text-white text-sm font-mono mx-8">{formattedTime}</div>
+      <div className="text-sm font-mono mx-5 flex flex-row gap-3 mt-2">
+        <div className="mt-2 text-black dark:text-white">{formattedTime}</div>
+         <div><DarkModeToggle /></div>
+         </div>
+      
+      
+
       
       </header>
   );
