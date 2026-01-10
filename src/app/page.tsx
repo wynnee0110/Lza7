@@ -62,7 +62,7 @@ export default function HomePage() {
         </div>
       </section>
       
-      <section id="about" className="w-full flex justify-center items-center sm:py-20 sm:mt-20">
+      <section id="about" className="w-full flex justify-center items-center sm:p-30 sm:py-20 sm:mt-20">
         <div className="w-full max-w-6xl flex flex-col sm:flex-row justify-between gap-2 px-10 ">
           {/* LEFT SIDE — TEXT */}
           <div className="flex-1 min-w-0">
@@ -114,7 +114,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section id="projects" className="bg-black-100 flex justify-center sm:mt-5 ">
+      <section id="projects" className="bg-black-100 flex justify-center sm:p-30 mt-[-90px]">
         <div className="w-full max-w-6xl px-4 sm:px-10 py-8">
           <div className="flex items-center gap-4 mb-5 w-full">
             <h2 className="text-3xl sm:text-5xl text-gray-500 font-bold">
@@ -127,7 +127,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="w-full py-20 flex flex-col items-center text-center">
+      <section className="w-full py-0 sm:mb-20 flex flex-col items-center text-center">
         <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
           Let&apos;s build something great together.
         </h2>
