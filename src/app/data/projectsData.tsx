@@ -21,6 +21,13 @@ export const projects = [
     languages: ["Next.js", "Node.js", "Prisma", "PostgreSQL", "Tailwind"],
     link: "https://intrasyss.vercel.app/"
   },
+    {
+    title: "Project Management Tool",
+    description: "A collaborative task management app for teams with role-based access.",
+    description2: "Features task boards, deadlines, and activity logs stored in the database.",
+    languages: ["Next.js", "Node.js", "Prisma", "PostgreSQL", "Tailwind"],
+    link: "https://intrasyss.vercel.app/"
+  },
 
 
   
