@@ -22,50 +22,50 @@ export default function Contact() {
     <main className="overflow-hidden">
       <Header />
 
-      <div className="flex bg-gray-660 min-h-screen items-center justify-center px-4 overflow-hidden">
+      <div className="flex bg-gray-660 min-h-screen items-center justify-center px-4 overflow-hidden ">
         <div className="transform scale-[0.8] flex flex-col w-full sm:w-[90%] md:w-[90%] lg:w-[500px] p-6 rounded-2xl">
           {/* Header */}
           <section className="mb-8 text-center md:text-left">
-            <h1 className="text-3xl md:text-4xl font-bold text-white mb-4">
+            <h1 className="text-3xl md:text-4xl font-bold text-black dark:text-white mb-4">
               Contact Me
             </h1>
-            <p className="text-gray-400 max-w-md mx-auto md:mx-0">
+            <p className="text-black dark:text-white max-w-md mx-auto md:mx-0">
               Feel free to reach out to me using the form below.
             </p>
           </section>
 
           
           <form onSubmit={handleSubmit} className="flex flex-col gap-3">
-            <label className="text-white font-semibold">Name</label>
+            <label className="text-black dark:text-white font-semibold">Name</label>
             <input
               id="name"
               type="text"
               name="name"
               required
-              className="p-2 border-b border-gray-500 bg-transparent text-white focus:outline-none"
+              className="p-2 border-b border-gray-500 bg-transparent text-black dark:text-white focus:outline-none"
               placeholder="Your Name"
             />
 
             <ValidationError prefix="Name" field="name" errors={state.errors} />
 
-            <label className="text-white font-semibold">Email</label>
+            <label className="text-black dark:text-white font-semibold">Email</label>
             <input
               id="email"
               type="email"
               name="email"
               required
-              className="p-2 border-b border-gray-500 bg-transparent text-white focus:outline-none"
+              className="p-2 border-b border-gray-500 bg-transparent text-black dark:text-white focus:outline-none"
               placeholder="Your Email"
             />
 
             <ValidationError prefix="Email" field="email" errors={state.errors} />
 
-            <label className="text-white font-semibold">Message</label>
+            <label className="text-black dark:text-white font-semibold">Message</label>
             <textarea
               id="message"
               name="message"
               required
-              className="p-2 border-b border-gray-500 bg-transparent text-white focus:outline-none resize-none"
+              className="p-2 border-b border-gray-500 bg-transparent text-black dark:text-white focus:outline-none resize-none"
               placeholder="Your Message"
               rows={5}
             ></textarea>
@@ -82,7 +82,7 @@ export default function Contact() {
                 {state.submitting ? "Sending..." : "Submit"}
               </button>
 
-              <div className="flex gap-4 text-white text-2xl mb-2">
+              <div className="flex gap-4 text-black dark:text-white text-2xl mb-2">
                 <a
                   href="https://github.com/"
                   target="_blank"
