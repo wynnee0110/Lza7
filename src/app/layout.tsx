@@ -6,6 +6,10 @@ import {ThemeProvider} from "next-themes";
 
 
 
+export const viewport = {
+  width: "device-width",
+initialScale: 1,
+};
 
 const geistSans = Geist({
   variable: "--font-geist-sans",

@@ -3,7 +3,7 @@ import { FiExternalLink } from "react-icons/fi";  // adjust path based on file s
 
 export default function ProjectsSection() {
   return (
-<section className="grid grid-cols-1 sm:grid-cols-1 lg:grid-cols-2 gap-6 sm:p-10 md:p-20 lg:p-25">
+<section className="grid grid-cols-1 sm:grid-cols-1 lg:grid-cols-2 gap-6 sm:p-10 md:p-20 lg:p-20" id="projects">
   {projects.map((project, index) => (
 <div
   key={index}
