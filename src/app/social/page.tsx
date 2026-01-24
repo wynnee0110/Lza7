@@ -1,8 +1,13 @@
 "use client"
 
+import Header from "../components/Header";
+
 function Page () {
     return (
-        <div>Social Page</div>
+        <div>
+        <Header />
+        </div>
+        
 
         
 
