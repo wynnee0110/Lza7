@@ -13,7 +13,6 @@ export default function HomePage() {
     <main>
       <Header />
 
-
 <section className="flex flex-col md:flex-col justify-center items-center min-h-[100svh] lg:mt-15 mt-10 lg:mt-0 gap-5 px-6 lg:px-0">
         
 <div className="justify-center mt-10 items">
@@ -30,10 +29,12 @@ export default function HomePage() {
 />
 
 </div>
-<div className="text-4xl">
-  <a href="/social" className="inline-flex items-center gap-2">
+<div className="flex flex-col items-center text-4xl">
+  <a href="/social" className="inline-flex items-center gap-2 ">
      <span>Wayne Obial</span>              
  </a>
+      <span className="text-sm text-gray-400 mt-2">Front-end Developer</span>
+ 
 </div>
         <p className="max-w-xl text-center md:text-left text-left">
           Hi, I’m Wayne — a technology-driven learner with a strong interest in building
@@ -75,7 +76,7 @@ export default function HomePage() {
 <div className="w-full max-w-xl mt-6 mb-8">
   <h2 className="mb-4 text-lg font-medium text-gray-400">Connect</h2>
 
-  <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4 ">
+  <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-8  ">
     {connect.map((item, index) => (
       <a
         key={index}
@@ -85,7 +86,7 @@ export default function HomePage() {
       
         "
       >
-        <span className="font-medium text-md">{item.name}</span>
+        <span className="font-medium text-md text-">{item.name}</span>
 
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -106,15 +107,8 @@ export default function HomePage() {
   </div>
 </div>
 
-
-
-
-
-
-
       </section>
       <Footer/>
-      
       
     </main>
   );

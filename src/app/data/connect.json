@@ -19,6 +19,11 @@
     "name": "Twitter",
     "url": "https://twitter.com/yourusername",
     "icon": "twitter"
+  },
 
+    {
+    "name": "Cv",
+    "url": "/MyCv.pdf",
+    "icon": "email"
   }
 ]
