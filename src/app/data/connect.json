@@ -25,5 +25,11 @@
     "name": "Cv",
     "url": "/MyCv.pdf",
     "icon": "email"
+  }, 
+
+  {
+    "name": "Works",
+    "url": "/projects",
+    "icon": "works"
   }
 ]

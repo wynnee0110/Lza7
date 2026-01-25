@@ -30,9 +30,7 @@ export default function HomePage() {
 
 </div>
 <div className="flex flex-col items-center text-4xl">
-  <a href="/social" className="inline-flex items-center gap-2 ">
      <span>Wayne Obial</span>              
- </a>
       <span className="text-sm text-gray-400 mt-2">Front-end Developer</span>
  
 </div>
