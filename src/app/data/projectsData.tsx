@@ -7,21 +7,22 @@ export const projects = [
     link: "https://intrasyss.vercel.app/",
   },
   {
-    title: "OLLO AI",
-    description: "An AI-powered platform designed to enhance productivity, creativity, and learning.",
-    description2: "Includes multi-purpose AI tools, task assistance, and idea generation features.",
-    languages: ["React", "TypeScript", "Gemini", "FastAPI"],
-    link: "#",
+title: "archive",
+description: "A community-driven social platform where users share posts, interact, and build their online presence.",
+description2: "Features authentication, profiles, avatars, likes, comments, and real-time engagement powered by a modern full-stack architecture.",
+languages: ["Next.js","React", "TypeScript", "Supabase", "Tailwind CSS","postgreSQL"],
+link: "https://ar7.vercel.app/",
+
   },
   {
     title: "Project Management Tool",
     description: "A collaborative task management application for teams with role-based access.",
     description2: "Features Kanban boards, deadlines, and activity logs stored in a relational database.",
     languages: ["Next.js", "Node.js", "Prisma", "PostgreSQL", "Tailwind"],
-    link: "https://intrasyss.vercel.app/",
+    link: "#",
   },
 
-  // 🔽 MOCK PROJECTS BASED ON YOU 🔽
+  // 🔽 MOCK PROJECTS BASED ON YOU 
 
   {
     title: "3D Campus Navigation System",
