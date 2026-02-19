@@ -31,7 +31,7 @@ export default function HomePage() {
 </div>
 <div className="flex flex-col items-center text-4xl">
      <span>Wayne Obial</span>              
-      <span className="text-sm text-gray-400 mt-2">Front-end Developer</span>
+      <span className="text-sm text-gray-400 mt-2">Software Developer</span>
  
 </div>
         <p className="max-w-xl text-center md:text-left text-left">
