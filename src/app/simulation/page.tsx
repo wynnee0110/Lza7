@@ -19,7 +19,7 @@ function Page() {
 
       <main className="flex-grow flex flex-col items-center p-6 md:p-20">
 
-        <button className="btn btn-xs sm:btn-sm md:btn-md lg:btn-lg xl:btn-xl" onClick={() => router.back()}>
+        <button className="btn btn-active rounded-full mb-10" onClick={() => router.back()}>
           <ArrowLeft />
           Back
         </button>
