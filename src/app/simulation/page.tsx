@@ -1,7 +1,7 @@
 "use client";
 
 import 'katex/dist/katex.min.css';
-// @ts-expect-error
+// @ts-expect-error react-katex has no type declarations
 import { BlockMath } from 'react-katex';
 import { useRouter } from 'next/navigation';
 import React from 'react';
