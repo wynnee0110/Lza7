@@ -1,7 +1,7 @@
 "use client";
 
 import 'katex/dist/katex.min.css';
-// @ts-ignore
+// @ts-expect-error
 import { BlockMath } from 'react-katex';
 import { useRouter } from 'next/navigation';
 import React from 'react';
