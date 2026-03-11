@@ -9,15 +9,7 @@ function Page () {
         <Header />
         <Footer />
         </div>
-        
-
-        
-
-
-
     )
-
-
 
 
 }

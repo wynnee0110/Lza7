@@ -31,5 +31,11 @@
     "name": "Works",
     "url": "/works",
     "icon": "works"
+  },
+
+  {
+    "name": "Simulations",
+    "url": "/simulation",
+    "icon": "simulation"
   }
 ]
