@@ -5,7 +5,7 @@ interface PreloaderTailwindProps {
   minMs?: number;
 }
 
-export default function PreloaderTailwind({ minMs = 100 }: PreloaderTailwindProps) {
+export default function PreloaderTailwind({ minMs = 300 }: PreloaderTailwindProps) {
   const [visible, setVisible] = useState(true);
   const [fadeOut, setFadeOut] = useState(false);
 
@@ -17,8 +17,8 @@ export default function PreloaderTailwind({ minMs = 100 }: PreloaderTailwindProp
       const wait = Math.max(0, minMs - elapsed);
 
       setTimeout(() => {
-        setFadeOut(true); 
-        setTimeout(() => setVisible(false), 100); 
+        setFadeOut(true);
+        setTimeout(() => setVisible(false), 1000);
       }, wait);
     }
 

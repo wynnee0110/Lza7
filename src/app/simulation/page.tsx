@@ -17,7 +17,7 @@ function Page() {
     <div className="w-full min-h-screen flex flex-col bg-background overflow-x-hidden scrollbar-hide">
       <Header />
 
-      <main className="flex-grow flex flex-col items-center p-6 md:p-20">
+      <main className="flex-grow flex flex-col items-center p-6 md:p-20 mt-20 sm:mt-0" >
 
         <button className="btn btn-active rounded-full mb-10" onClick={() => router.back()}>
           <ArrowLeft />
