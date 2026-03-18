@@ -1,22 +1,26 @@
+"use client";
 
 import Header from "../components/Header";
 import ProjectsSection from "../components/ProjectsSection";
 import Link from "next/link";
+import { useRouter } from 'next/navigation';
+import { ArrowLeft } from 'lucide-react';
+
 
 export default function WorksPage() {
+    const router = useRouter();
+
     return (
-        <section className="flex flex-col justify-center items-center min-h-[100svh] lg:mt-15 mt-10 lg:mt-0 gap-5 px-6 lg:px-0">
+        <section className="flex flex-col justify-center items-center min-h-[100svh] lg:mt-20 mt-20 lg:mt-0 gap-5 px-6 lg:px-0">
         <Header />
 
+        <button className="btn btn-active rounded-full mb-0" onClick={() => router.back()}>
+          <ArrowLeft />
+          Back
+        </button>
 
-        <div className="mt-15" >
-            <Link href="/" className="inline-flex gap-0.5 ml-8 text-gray-500 hover:text-white transition-all duration-300 ease-out 
-             hover:opacity-70">
-                <svg width="24" height="100%" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
- <path d="M20 12H4M4 12L10 18M4 12L10 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
- </svg>
- <span className="px-2 mt-0.4">Go to Home</span>
-            </Link>
+        <div className="mt-10" >
+
 
             <ProjectsSection />
         </div>

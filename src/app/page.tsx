@@ -17,7 +17,7 @@ export default function HomePage() {
         
 <div className="justify-center mt-10 items">
 <Image
-  src="/images/Rudo.jpg"
+  src="/images/2.jpeg"
   alt="Profile picture"
   width={160}
   height={160}
@@ -27,6 +27,7 @@ export default function HomePage() {
     md:w-42 md:h-40
     lg:w-48 lg:h-48"
 />
+
 
 </div>
 <div className="flex flex-col items-center text-4xl">
