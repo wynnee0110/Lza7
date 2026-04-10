@@ -23,12 +23,12 @@
 
     {
     "name": "Cv",
-    "url": "/MyC.pdf",
+    "url": "/MyCV.pdf",
     "icon": "email"
   }, 
 
   {
-    "name": "Works",
+    "name": "Projects",
     "url": "/works",
     "icon": "works"
   },
