@@ -2,13 +2,14 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Preloader from "./components/Preloader";
-import {ThemeProvider} from "next-themes";
+import { ThemeProvider } from "next-themes";
 
 
 
 export const viewport = {
   width: "device-width",
-initialScale: 1,
+  initialScale: 1,
+  maximumScale: 1,
 };
 
 const geistSans = Geist({
@@ -23,7 +24,7 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: "Wayne.Obial | Developer Portfolio",
-  description: "",
+  description: "Wayne Obial — Software Developer. Explore projects, simulations, and more.",
 };
 
 export default function RootLayout({
@@ -35,7 +36,7 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
         <Preloader minMs={800} />
-       
+
         <ThemeProvider attribute="class" enableSystem defaultTheme="system">{children}</ThemeProvider>
       </body>
     </html>

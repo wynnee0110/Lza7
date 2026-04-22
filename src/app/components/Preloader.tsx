@@ -10,6 +10,12 @@ export default function PreloaderTailwind({ minMs = 300 }: PreloaderTailwindProp
   const [fadeOut, setFadeOut] = useState(false);
 
   useEffect(() => {
+    // Only show the preloader on the root home page
+    if (typeof window !== "undefined" && window.location.pathname !== "/") {
+      setVisible(false);
+      return;
+    }
+
     const start = performance.now();
 
     function hide() {

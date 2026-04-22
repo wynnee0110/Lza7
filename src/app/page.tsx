@@ -7,6 +7,7 @@ import experience from "./data/experience.json";
 import connect from "./data/connect.json";
 
 
+
 export default function HomePage() {
   return (
     <main className="overflow-y-auto [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none] min-h-[100svh] bg-gray-50 dark:bg-[#0a0a0a] text-gray-800 dark:text-gray-300 pb-10 transition-colors duration-300">
