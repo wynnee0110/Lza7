@@ -97,7 +97,7 @@ export default function HomePage() {
 
                 {/* Experience Section formatted as a "Code" or "Quote" block */}
                 <div className="mt-8 bg-gray-50 dark:bg-[#111112] border border-gray-200 dark:border-[#333] rounded-md p-4 transition-colors duration-300">
-                  <p className="text-red-600 dark:text-red-400 font-mono text-sm mb-4">/* System.Experience Logs */</p>
+                  <p className="text-red-600 dark:text-red-400 font-mono text-sm mb-4">{"/* System.Experience Logs */"}</p>
 
                   <div className="relative border-l-2 border-gray-300 dark:border-[#333] pl-4 space-y-6 ml-2">
                     {experience.map((item, index) => (
@@ -107,7 +107,7 @@ export default function HomePage() {
 
                         <h3 className="font-semibold text-gray-900 dark:text-gray-200">{item.role}</h3>
                         <p className="text-xs text-gray-500 dark:text-gray-500 mb-1">{item.period}</p>
-                        <p className="text-sm text-gray-600 dark:text-gray-400 italic">"{item.description}"</p>
+                        <p className="text-sm text-gray-600 dark:text-gray-400 italic">&quot;{item.description}&quot;</p>
                       </div>
                     ))}
                   </div>
