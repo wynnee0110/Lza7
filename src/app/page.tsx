@@ -10,14 +10,14 @@ import connect from "./data/connect.json";
 
 export default function HomePage() {
   return (
-    <main className="overflow-y-auto [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none] min-h-[100svh] bg-gray-50 dark:bg-[#0a0a0a] text-gray-800 dark:text-gray-300 pb-10 transition-colors duration-300">
+    <main className="overflow-hidden [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none] h-[100svh] bg-gray-50 dark:bg-[#0a0a0a] text-gray-800 dark:text-gray-300 transition-colors duration-300">
       <Header />
 
       {/* Zoomed content wrapper — header is excluded */}
-      
-      <div style={{ zoom: 0.9 }}>
+
+      <div style={{ zoom: 1.0 }}>
         {/* Main Forum Post Container */}
-        <section className="pt-25 max-w-5xl mx-auto px-4 lg:px-0 ">
+        <section className="pt-20 max-w-5xl mx-auto px-4 lg:px-0 ">
           <div className="flex flex-col md:flex-row bg-white dark:bg-[#161618] border border-gray-200 dark:border-[#2d2d2d] rounded-md overflow-hidden shadow-xl dark:shadow-2xl transition-colors duration-300">
 
             {/* Left Sidebar: Profile (Mimicking the forum user info) */}
