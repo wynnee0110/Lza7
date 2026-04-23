@@ -14,6 +14,7 @@ export default function HomePage() {
       <Header />
 
       {/* Zoomed content wrapper — header is excluded */}
+      
       <div style={{ zoom: 0.9 }}>
         {/* Main Forum Post Container */}
         <section className="pt-25 max-w-5xl mx-auto px-4 lg:px-0 ">
