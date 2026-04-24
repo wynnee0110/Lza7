@@ -3,12 +3,12 @@
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import ProjectsSection from "../components/ProjectsSection";
-import { useRouter } from "next/navigation";
+
 import { ArrowLeft } from 'lucide-react';
 import Link from 'next/link';
 
 export default function WorksPage() {
-    const router = useRouter();
+
 
     return (
         <main className="overflow-y-auto [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none] min-h-[100svh] bg-gray-50 dark:bg-[#0a0a0a] text-gray-800 dark:text-gray-300 pb-10 transition-colors duration-300">
