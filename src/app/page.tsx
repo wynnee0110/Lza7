@@ -5,10 +5,56 @@ import Header from "./components/Header";
 import Footer from "./components/Footer";
 import experience from "./data/experience.json";
 import connect from "./data/connect.json";
+import { Cpu, Wifi } from "lucide-react";
+import { FaReact } from "react-icons/fa";
+import { useState } from "react";
+import { Brain } from "lucide-react";
 
 
+
+interface Tooltip {
+  visible: boolean;
+  text: string;
+  x: number;
+  y: number;
+}
 
 export default function HomePage() {
+  const [tooltip, setTooltip] = useState<Tooltip>({
+    visible: false,
+    text: "",
+    x: 0,
+    y: 0,
+  });
+
+const handleMouseMove = (
+  e: React.MouseEvent<HTMLDivElement>,
+  text: string
+) => {
+  setTooltip({
+    visible: true,
+    text,
+    x: e.clientX + 15,
+    y: e.clientY + 15,
+  });
+};
+
+  const handleMouseLeave = () => {
+    setTooltip((prev) => ({
+      ...prev,
+      visible: false,
+    }));
+  };
+
+
+
+
+
+
+
+
+
+
   return (
     <main className="overflow-hidden [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none] h-[100svh] bg-gray-50 dark:bg-[#0a0a0a] text-gray-800 dark:text-gray-300 transition-colors duration-300">
       <Header />
@@ -44,9 +90,53 @@ export default function HomePage() {
               </div>
 
               {/* Badge */}
+
               <div className="w-full text-center border border-pink-500 dark:border-[#b8287f] bg-pink-100 dark:bg-[#b8287f]/10 text-pink-700 dark:text-[#b8287f] font-bold text-xs py-1.5 uppercase tracking-widest mb-6">
-                Software Dev
-              </div>
+               Software Dev </div>
+
+   
+      {/* Badges */}
+      <div className="w-full flex justify-center gap-4 mb-6">
+        
+        <div
+          onMouseMove={(e) => handleMouseMove(e, "React Developer")}
+          onMouseLeave={handleMouseLeave}
+          className="cursor-pointer"
+        >
+          <FaReact className="text-cyan-500 text-3xl hover:scale-110 transition-transform" />
+        </div>
+
+        <div
+          onMouseMove={(e) => handleMouseMove(e, "IoT")}
+          onMouseLeave={handleMouseLeave}
+          className="cursor-pointer"
+        >
+          <Cpu className="text-green-500 w-7 h-7 hover:scale-110 transition-transform" />
+        </div>
+
+
+        <div
+          onMouseMove={(e) => handleMouseMove(e, "AI/ML")}
+          onMouseLeave={handleMouseLeave}
+          className="cursor-pointer"
+        >
+           <Brain className="text-purple-400 w-7 h-7 hover:scale-110 transition-transform" />
+
+        </div>
+      </div>
+
+      {/* Floating Tooltip */}
+      {tooltip.visible && (
+        <div
+          className="fixed z-50 bg-black text-white text-xs px-2 py-1 rounded pointer-events-none"
+          style={{
+            left: tooltip.x,
+            top: tooltip.y,
+          }}
+        >
+          {tooltip.text}
+        </div>
+      )}
 
               {/* Connect / "Stats" Section */}
               <div className="w-full text-xs space-y-2 text-gray-600 dark:text-gray-400">
