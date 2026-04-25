@@ -23,7 +23,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Wayne.Obial | Developer Portfolio",
+  title: "Lza7",
   description: "Wayne Obial — Software Developer. Explore projects, simulations, and more.",
 };
 
