@@ -9,6 +9,8 @@ import Reactdiff from '../components/Reactdiff';
 import Lorenz from '../components/Lorenz';
 import Header from '../components/Header';
 import { ArrowLeft } from 'lucide-react';
+import BubbleSort from '../components/Bubblesort';
+import NeuralNetwork from '../components/Neuralnetwork';
 
 function Page() {
   return (
@@ -103,6 +105,78 @@ function Page() {
                     <Lorenz />
                   </div>
                 </div>
+
+
+                {/* Divider */}
+<hr className="w-24 border-gray-300 dark:border-[#333] opacity-50" />
+
+{/* =========================================
+    3. BUBBLE SORT
+========================================= */}
+<div className="flex flex-col items-center w-full gap-6">
+  <h1 className="font-bold text-2xl w-full text-gray-900 dark:text-gray-100">
+    3. Bubble Sort
+  </h1>
+
+  <p className="text-sm text-gray-600 dark:text-gray-400 leading-relaxed w-full">
+    A step-by-step visualization of one of the most intuitive sorting
+    algorithms. Adjacent elements are repeatedly compared and swapped
+    until the array becomes sorted.
+  </p>
+
+  <div className="flex flex-col items-center justify-center text-gray-500 dark:text-gray-400 w-full max-w-full mt-2">
+    <p className="text-sm mb-4">Time complexity:</p>
+
+    <div className="text-lg overflow-x-auto max-w-full">
+      <BlockMath math="T(n)=O(n^2)" />
+    </div>
+
+    <div className="text-lg mt-2 overflow-x-auto max-w-full">
+      <BlockMath math="\text{swap if } A[j] > A[j+1]" />
+    </div>
+  </div>
+
+  <div className="w-full mt-4">
+    <BubbleSort />
+  </div>
+</div>
+
+{/* Divider */}
+<hr className="w-24 border-gray-300 dark:border-[#333] opacity-50" />
+
+{/* =========================================
+    4. NEURAL NETWORK
+========================================= */}
+<div className="flex flex-col items-center w-full gap-6">
+  <h1 className="font-bold text-2xl w-full text-gray-900 dark:text-gray-100">
+    4. Neural Network
+  </h1>
+
+  <p className="text-sm text-gray-600 dark:text-gray-400 leading-relaxed w-full">
+    A visualization of a feedforward neural network where values
+    propagate through weighted layers and activations.
+  </p>
+
+  <div className="flex flex-col items-center justify-center text-gray-500 dark:text-gray-400 w-full max-w-full mt-2">
+    <p className="text-sm mb-4">Forward propagation:</p>
+
+    <div className="text-lg overflow-x-auto max-w-full">
+      <BlockMath math="a^{(l)} = \sigma(W^{(l)}a^{(l-1)} + b^{(l)})" />
+    </div>
+
+    <div className="text-lg mt-2 overflow-x-auto max-w-full">
+      <BlockMath math="\text{ReLU}(x)=\max(0,x)" />
+    </div>
+  </div>
+
+  <div className="w-full mt-4">
+    <NeuralNetwork />
+  </div>
+</div>
+
+
+
+
 
               </div>
             </div>

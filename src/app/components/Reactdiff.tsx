@@ -1,181 +1,255 @@
 "use client";
 
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef } from "react";
+
+const SIZE = 320;
+const dA = 1.0;
+const dB = 0.5;
+const feed = 0.055;
+const kill = 0.062;
 
 const ReactionDiffusion: React.FC = () => {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
+  const containerRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
     const canvas = canvasRef.current;
-    if (!canvas) return;
+    const container = containerRef.current;
 
-    const ctx = canvas.getContext('2d', { willReadFrequently: true });
+    if (!canvas || !container) return;
+
+    const ctx = canvas.getContext("2d", {
+      willReadFrequently: true,
+    });
+
     if (!ctx) return;
 
-    // Internal resolution
-    const size = 320;
-    canvas.width = size;
-    canvas.height = size;
+    canvas.width = SIZE;
+    canvas.height = SIZE;
 
-    // Using Float32Arrays for massive performance gains
-    let gridA = new Float32Array(size * size);
-    let gridB = new Float32Array(size * size);
-    let nextA = new Float32Array(size * size);
-    let nextB = new Float32Array(size * size);
+    let gridA = new Float32Array(SIZE * SIZE);
+    let gridB = new Float32Array(SIZE * SIZE);
+    let nextA = new Float32Array(SIZE * SIZE);
+    let nextB = new Float32Array(SIZE * SIZE);
 
-    // Labyrinth Parameters
-    const dA = 1.0;
-    const dB = 0.5;
-    const feed = 0.055;
-    const kill = 0.062;
+    let animationFrameId = 0;
+    let isVisible = true;
+    let lastMouseTime = 0;
 
-    let animationFrameId: number;
+    /* -----------------------
+       Reuse image buffer
+    ------------------------ */
+    const imageData = ctx.createImageData(SIZE, SIZE);
+    const pixels = imageData.data;
 
     const init = () => {
       gridA.fill(1);
       gridB.fill(0);
 
-      // Random noise to seed the maze
-      for (let i = 0; i < size * size; i++) {
+      for (let i = 0; i < SIZE * SIZE; i++) {
         if (Math.random() < 0.1) {
           gridB[i] = 1;
         }
       }
 
-      // Pre-calculate the maze so it's fully formed on load
-      for (let i = 0; i < 1000; i++) {
+      // Precompute stable state
+      for (let i = 0; i < 500; i++) {
         update();
       }
     };
 
     const update = () => {
-      for (let y = 1; y < size - 1; y++) {
-        for (let x = 1; x < size - 1; x++) {
-          const i = x + y * size;
+      for (let y = 1; y < SIZE - 1; y++) {
+        for (let x = 1; x < SIZE - 1; x++) {
+          const i = x + y * SIZE;
 
           const a = gridA[i];
           const b = gridB[i];
 
-          // Calculate laplacian directly from the flat array
           const lapA =
-            gridA[i] * -1 +
+            -a +
             gridA[i - 1] * 0.2 +
             gridA[i + 1] * 0.2 +
-            gridA[i - size] * 0.2 +
-            gridA[i + size] * 0.2 +
-            gridA[i - size - 1] * 0.05 +
-            gridA[i - size + 1] * 0.05 +
-            gridA[i + size - 1] * 0.05 +
-            gridA[i + size + 1] * 0.05;
+            gridA[i - SIZE] * 0.2 +
+            gridA[i + SIZE] * 0.2 +
+            gridA[i - SIZE - 1] * 0.05 +
+            gridA[i - SIZE + 1] * 0.05 +
+            gridA[i + SIZE - 1] * 0.05 +
+            gridA[i + SIZE + 1] * 0.05;
 
           const lapB =
-            gridB[i] * -1 +
+            -b +
             gridB[i - 1] * 0.2 +
             gridB[i + 1] * 0.2 +
-            gridB[i - size] * 0.2 +
-            gridB[i + size] * 0.2 +
-            gridB[i - size - 1] * 0.05 +
-            gridB[i - size + 1] * 0.05 +
-            gridB[i + size - 1] * 0.05 +
-            gridB[i + size + 1] * 0.05;
+            gridB[i - SIZE] * 0.2 +
+            gridB[i + SIZE] * 0.2 +
+            gridB[i - SIZE - 1] * 0.05 +
+            gridB[i - SIZE + 1] * 0.05 +
+            gridB[i + SIZE - 1] * 0.05 +
+            gridB[i + SIZE + 1] * 0.05;
 
-          // Gray-Scott formulas
           const abb = a * b * b;
-          nextA[i] = Math.min(Math.max(a + (dA * lapA - abb + feed * (1 - a)), 0), 1);
-          nextB[i] = Math.min(Math.max(b + (dB * lapB + abb - (kill + feed) * b), 0), 1);
+
+          nextA[i] = Math.min(
+            Math.max(a + (dA * lapA - abb + feed * (1 - a)), 0),
+            1
+          );
+
+          nextB[i] = Math.min(
+            Math.max(b + (dB * lapB + abb - (kill + feed) * b), 0),
+            1
+          );
         }
       }
 
-      // Swap arrays
-      const tempA = gridA;
-      gridA = nextA;
-      nextA = tempA;
-      const tempB = gridB;
-      gridB = nextB;
-      nextB = tempB;
+      [gridA, nextA] = [nextA, gridA];
+      [gridB, nextB] = [nextB, gridB];
     };
 
     const draw = () => {
-      const imageData = ctx.createImageData(size, size);
-      const data = imageData.data;
-
-      for (let i = 0; i < size * size; i++) {
+      for (let i = 0; i < SIZE * SIZE; i++) {
         const v = gridA[i] - gridB[i];
 
-        // Smoothstep interpolation
-        const edge0 = 0.2;
-        const edge1 = 0.3;
-        const t = Math.max(0, Math.min(1, (v - edge0) / (edge1 - edge0)));
+        const t = Math.max(
+          0,
+          Math.min(1, (v - 0.2) / (0.3 - 0.2))
+        );
+
         const smoothT = t * t * (3 - 2 * t);
+        const color = smoothT * 255;
 
-        const color = Math.floor(smoothT * 255);
-
-        const pixelIndex = i * 4;
-        data[pixelIndex] = color; // R
-        data[pixelIndex + 1] = color; // G
-        data[pixelIndex + 2] = color; // B
-        data[pixelIndex + 3] = 255; // A
+        const p = i * 4;
+        pixels[p] = color;
+        pixels[p + 1] = color;
+        pixels[p + 2] = color;
+        pixels[p + 3] = 255;
       }
 
       ctx.putImageData(imageData, 0, 0);
     };
 
+    /* -----------------------
+       Throttled mouse interaction
+    ------------------------ */
     const handleMouseMove = (e: MouseEvent) => {
-      const rect = canvas.getBoundingClientRect();
-      const scaleX = canvas.width / rect.width;
-      const scaleY = canvas.height / rect.height;
+      const now = performance.now();
 
-      const mouseX = Math.floor((e.clientX - rect.left) * scaleX);
-      const mouseY = Math.floor((e.clientY - rect.top) * scaleY);
+      if (now - lastMouseTime < 16) return; // ~60fps throttle
+      lastMouseTime = now;
+
+      const rect = canvas.getBoundingClientRect();
+
+      const x = Math.floor(
+        ((e.clientX - rect.left) / rect.width) * SIZE
+      );
+
+      const y = Math.floor(
+        ((e.clientY - rect.top) / rect.height) * SIZE
+      );
 
       const radius = 8;
 
-      for (let y = -radius; y <= radius; y++) {
-        for (let x = -radius; x <= radius; x++) {
-          if (x * x + y * y <= radius * radius) {
-            const cx = mouseX + x;
-            const cy = mouseY + y;
+      for (let dy = -radius; dy <= radius; dy++) {
+        for (let dx = -radius; dx <= radius; dx++) {
+          if (dx * dx + dy * dy <= radius * radius) {
+            const cx = x + dx;
+            const cy = y + dy;
 
-            if (cx >= 1 && cx < size - 1 && cy >= 1 && cy < size - 1) {
-              const index = cx + cy * size;
-              gridB[index] = 1;
+            if (
+              cx > 0 &&
+              cx < SIZE - 1 &&
+              cy > 0 &&
+              cy < SIZE - 1
+            ) {
+              gridB[cx + cy * SIZE] = 1;
             }
           }
         }
       }
     };
 
-    const animate = () => {
-      for (let i = 0; i < 12; i++) {
-        update();
+    /* -----------------------
+       Pause when offscreen
+    ------------------------ */
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        isVisible = entry.isIntersecting;
+      },
+      { threshold: 0.1 }
+    );
+
+    observer.observe(container);
+
+    /* -----------------------
+       Pause when tab hidden
+    ------------------------ */
+    const handleVisibilityChange = () => {
+      isVisible = !document.hidden;
+    };
+
+    document.addEventListener(
+      "visibilitychange",
+      handleVisibilityChange
+    );
+
+    /* -----------------------
+       Animation loop
+    ------------------------ */
+    let lastTime = 0;
+
+    const animate = (time: number) => {
+      if (!isVisible) {
+        animationFrameId = requestAnimationFrame(animate);
+        return;
       }
-      draw();
+
+      if (time - lastTime > 16) {
+        for (let i = 0; i < 6; i++) {
+          update();
+        }
+
+        draw();
+        lastTime = time;
+      }
+
       animationFrameId = requestAnimationFrame(animate);
     };
 
-    // Attach event listener
-    canvas.addEventListener('mousemove', handleMouseMove);
+    canvas.addEventListener("mousemove", handleMouseMove);
 
-    // Boot up
     init();
-    animate();
+    animate(0);
 
-    // Cleanup on unmount
     return () => {
       cancelAnimationFrame(animationFrameId);
-      canvas.removeEventListener('mousemove', handleMouseMove);
-    };
-  }, []); // Empty dependency array ensures this runs only once on mount
+      observer.disconnect();
 
-return (
-    <div className="flex justify-center items-center w-full h-full bg-transparent overflow-hidden m-0">
+      document.removeEventListener(
+        "visibilitychange",
+        handleVisibilityChange
+      );
+
+      canvas.removeEventListener(
+        "mousemove",
+        handleMouseMove
+      );
+    };
+  }, []);
+
+  return (
+    <div
+      ref={containerRef}
+      className="flex justify-center items-center w-full h-full bg-transparent overflow-hidden"
+    >
       <canvas
         ref={canvasRef}
-        // Swapped the raw CSS for Tailwind arbitrary values: blur-[2px] contrast-[500%]
-        className="blur-[2px] contrast-[500%] w-full max-w-[350px] aspect-square rounded-lg shadow-[0_10px_30px_rgba(0,0,0,0.04)] dark:invert"
+        className="w-full max-w-[350px] aspect-square rounded-lg 
+        blur-[2px] contrast-[500%]
+        shadow-[0_10px_30px_rgba(0,0,0,0.04)]
+        dark:invert"
       />
     </div>
   );
 };
 
-export default ReactionDiffusion;
+export default React.memo(ReactionDiffusion);

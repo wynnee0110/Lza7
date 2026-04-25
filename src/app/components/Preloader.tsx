@@ -1,35 +1,32 @@
 "use client";
+
 import { useEffect, useState } from "react";
 
-interface PreloaderTailwindProps {
+interface PreloaderProps {
   minMs?: number;
 }
 
-export default function PreloaderTailwind({ minMs = 300 }: PreloaderTailwindProps) {
+export default function Preloader({ minMs = 500 }: PreloaderProps) {
   const [visible, setVisible] = useState(true);
-  const [fadeOut, setFadeOut] = useState(false);
 
   useEffect(() => {
-    // Only show the preloader on the root home page
-    if (typeof window !== "undefined" && window.location.pathname !== "/") {
+    if (window.location.pathname !== "/") {
       setVisible(false);
       return;
     }
 
     const start = performance.now();
 
-    function hide() {
+    const hide = () => {
       const elapsed = performance.now() - start;
       const wait = Math.max(0, minMs - elapsed);
 
-      setTimeout(() => {
-        setFadeOut(true);
-        setTimeout(() => setVisible(false), 1000);
-      }, wait);
-    }
+      setTimeout(() => setVisible(false), wait);
+    };
 
-    if (document.readyState === "complete") hide();
-    else {
+    if (document.readyState === "complete") {
+      hide();
+    } else {
       window.addEventListener("load", hide);
       return () => window.removeEventListener("load", hide);
     }
@@ -38,13 +35,8 @@ export default function PreloaderTailwind({ minMs = 300 }: PreloaderTailwindProp
   if (!visible) return null;
 
   return (
-    <div
-      aria-hidden="true"
-      className={`fixed inset-0 z-[9999] flex items-center justify-center bg-white dark:bg-black
-        transition-opacity duration-500 ${fadeOut ? "opacity-0" : "opacity-100"}`}
-    >
-      <div className="w-14 h-14 rounded-full border-4 border-black border-t-white dark:border-white dark:border-t-black animate-spin transform scale-[0.5]" />
-      <span className="sr-only">Loading...</span>
+    <div className="fixed inset-0 z-[9999] flex items-center justify-center bg-white dark:bg-black transition-opacity duration-500">
+      <div className="w-6 h-6 border-2 border-black dark:border-white border-t-transparent rounded-full animate-spin" />
     </div>
   );
 }

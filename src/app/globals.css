@@ -163,3 +163,135 @@ html {
 .transition-colors {
   will-change: background-color, color, border-color;
 }
+
+@keyframes portfolio-pan-a {
+  0% {
+    transform: translate3d(-6%, -4%, 0) scale(1);
+  }
+  50% {
+    transform: translate3d(6%, 3%, 0) scale(1.08);
+  }
+  100% {
+    transform: translate3d(-6%, -4%, 0) scale(1);
+  }
+}
+
+@keyframes portfolio-pan-b {
+  0% {
+    transform: translate3d(8%, 6%, 0) scale(1.05);
+  }
+  50% {
+    transform: translate3d(-8%, -5%, 0) scale(1);
+  }
+  100% {
+    transform: translate3d(8%, 6%, 0) scale(1.05);
+  }
+}
+
+@keyframes portfolio-grid-drift {
+  0% {
+    transform: translate3d(0, 0, 0);
+  }
+  100% {
+    transform: translate3d(120px, 120px, 0);
+  }
+}
+
+@keyframes portfolio-grain-shift {
+  0% {
+    transform: translate3d(0, 0, 0);
+  }
+  25% {
+    transform: translate3d(-2%, 1%, 0);
+  }
+  50% {
+    transform: translate3d(1%, -1%, 0);
+  }
+  75% {
+    transform: translate3d(2%, 1%, 0);
+  }
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+.portfolio-bg {
+  --bg-base: #f2f2f2;
+  --glow-a-core: #ffffff;
+  --glow-a-mid: #d4d4d4;
+  --glow-b-core: #efefef;
+  --glow-b-mid: #c4c4c4;
+  --grid-line: rgba(0, 0, 0, 0.08);
+  --grain-dot: #000000;
+  background: var(--bg-base);
+  overflow: hidden;
+  transition: background-color 450ms ease;
+}
+
+.dark .portfolio-bg {
+  --bg-base: #0a0a0a;
+  --glow-a-core: #ffffff;
+  --glow-a-mid: #9f9f9f;
+  --glow-b-core: #e6e6e6;
+  --glow-b-mid: #8b8b8b;
+  --grid-line: rgba(255, 255, 255, 0.08);
+  --grain-dot: #ffffff;
+}
+
+.portfolio-bg__glow {
+  position: absolute;
+  width: 70vmax;
+  height: 70vmax;
+  border-radius: 999px;
+  filter: blur(80px);
+  opacity: 0.32;
+  transition: opacity 450ms ease;
+}
+
+.portfolio-bg__glow--a {
+  top: -25vmax;
+  left: -18vmax;
+  background: radial-gradient(circle at center, var(--glow-a-core) 0%, var(--glow-a-mid) 36%, transparent 70%);
+  animation: portfolio-pan-a 18s ease-in-out infinite;
+  transition: background 450ms ease;
+}
+
+.portfolio-bg__glow--b {
+  bottom: -30vmax;
+  right: -22vmax;
+  background: radial-gradient(circle at center, var(--glow-b-core) 0%, var(--glow-b-mid) 32%, transparent 70%);
+  animation: portfolio-pan-b 22s ease-in-out infinite;
+  transition: background 450ms ease;
+}
+
+.portfolio-bg__grid {
+  position: absolute;
+  inset: -20%;
+  background-image:
+    linear-gradient(var(--grid-line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
+  background-size: 120px 120px;
+  mix-blend-mode: soft-light;
+  opacity: 0.35;
+  animation: portfolio-grid-drift 14s linear infinite;
+  transition: background-image 450ms ease;
+}
+
+.portfolio-bg__grain {
+  position: absolute;
+  inset: -50%;
+  opacity: 0.08;
+  background-image: radial-gradient(var(--grain-dot) 0.45px, transparent 0.45px);
+  background-size: 3px 3px;
+  animation: portfolio-grain-shift 1.8s steps(4) infinite;
+  transition: background-image 450ms ease;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .portfolio-bg__glow--a,
+  .portfolio-bg__glow--b,
+  .portfolio-bg__grid,
+  .portfolio-bg__grain {
+    animation: none;
+  }
+}
