@@ -104,7 +104,10 @@ const handleMouseMove = (
           className="cursor-pointer"
         >
           <FaReact className="text-cyan-500 text-3xl hover:scale-110 transition-transform" />
+          
         </div>
+
+        
 
         <div
           onMouseMove={(e) => handleMouseMove(e, "IoT")}
@@ -123,6 +126,7 @@ const handleMouseMove = (
            <Brain className="text-purple-400 w-7 h-7 hover:scale-110 transition-transform" />
 
         </div>
+        
       </div>
 
       {/* Floating Tooltip */}
@@ -156,8 +160,8 @@ const handleMouseMove = (
 
               {/* Post Meta Header */}
               <div className="bg-gray-100 dark:bg-[#1a1a1c] px-4 py-2 text-xs text-gray-500 dark:text-gray-500 border-b border-gray-200 dark:border-[#2d2d2d] flex justify-between items-center transition-colors duration-300">
-                <span>Posted just now (This portfolio was last modified recently by WayneObial.)</span>
-                <span className="font-bold text-gray-600 dark:text-gray-400">#1</span>
+                <span>(This portfolio was last modified recently on 25/04/2026)</span>
+                <span className="font-bold text-gray-600 dark:text-gray-400"></span>
               </div>
 
               {/* Post Body */}
@@ -169,7 +173,7 @@ const handleMouseMove = (
                 <div className="text-sm leading-relaxed text-gray-700 dark:text-gray-300 space-y-4">
                   <p>Greetings.</p>
                   <p>
-                    I’m Wayne — a technology-driven learner with a strong interest in building
+                    I’m <span className="font-bold">Wayne</span> a technology-driven learner with a strong interest in building
                     practical and creative digital solutions. I enjoy working on projects that
                     involve software development, automation, and problem-solving, and I’m always
                     curious about how systems work behind the scenes.
