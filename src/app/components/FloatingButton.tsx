@@ -14,7 +14,7 @@ import { FiX, FiGithub, FiLayers, FiZap } from "react-icons/fi";
 
 // ── static metadata ───────────────────────────────────────────
 const SITE_META = {
-    name: "hexctl · Wayne Obial",
+    name: "Wayne Obial — Software Developer",
     version: "v2.0.0",
     firstCommit: "Oct 20, 2025",
     lastUpdated: "Aug 08, 2026",

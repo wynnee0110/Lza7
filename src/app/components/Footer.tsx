@@ -2,10 +2,10 @@
 
 export default function Footer() {
   return (
-    <footer className="w-full py-4 px-8 bg-black-900 text-gray-400 flex flex-col sm:flex-row items-center justify-center border-gray-600">
-      <p className="text-sm">&copy; {new Date().getFullYear()} Wayne.Obial. All rights reserved.</p>
-        <div className="flex space-x-4 mt-2 sm:mt-0">
-            </div>
-      </footer>
+    <footer className="w-full py-4 px-8 bg-black-900 text-gray-400 flex flex-col sm:flex-row items-center justify-center gap-1 border-gray-600">
+      <p className="text-sm font-mono">
+        &copy; {new Date().getFullYear()} <span className="text-gray-300 font-semibold">Wayne Obial</span> &mdash; Software Developer &middot; hexctl.dev. All rights reserved.
+      </p>
+    </footer>
     );
 }

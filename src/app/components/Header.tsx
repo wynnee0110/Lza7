@@ -12,6 +12,8 @@ export default function Header({ pageTitle }: { pageTitle?: string }) {
         <Link href="/" className="font-semibold text-gray-900 dark:text-white shrink-0 hover:text-slate-600 dark:hover:text-slate-300 transition-colors">
           hexctl
         </Link>
+        <span className="text-gray-400 dark:text-gray-500 shrink-0">/</span>
+        <span className="text-gray-800 dark:text-gray-200 font-medium truncate">Wayne Obial — Software Developer</span>
         {pageTitle && (
           <>
             <span className="text-gray-400 dark:text-gray-500 shrink-0">/</span>

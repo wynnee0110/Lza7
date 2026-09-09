@@ -83,6 +83,7 @@ export default function HomePage() {
           <Terminal className="w-3.5 h-3.5 text-slate-700 dark:text-slate-300 animate-pulse shrink-0" />
           <span className="font-semibold text-gray-900 dark:text-white shrink-0">hexctl</span>
           <span className="text-gray-400 dark:text-gray-500 shrink-0">/</span>
+          <span className="text-gray-800 dark:text-gray-200 font-medium truncate">Wayne Obial — Software Developer</span>
         </div>
 
         <div className="flex items-center gap-4 text-xs font-mono shrink-0">
