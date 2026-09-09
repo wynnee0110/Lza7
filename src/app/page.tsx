@@ -295,7 +295,6 @@ export default function HomePage() {
                 <>
                   <article className="space-y-4">
 
-
                     <div className="text-sm leading-relaxed text-gray-600 dark:text-gray-300 space-y-3 font-normal">
 
                       <p>
