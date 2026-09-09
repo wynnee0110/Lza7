@@ -283,7 +283,6 @@ export default function HomePage() {
               </button>
             </div>
           </div>
-
           {/* Scrollable Main Content Stream */}
           <div
             ref={scrollContainerRef}
