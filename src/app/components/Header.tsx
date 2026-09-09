@@ -10,7 +10,7 @@ export default function Header({ pageTitle }: { pageTitle?: string }) {
       <div className="flex items-center gap-2 font-mono text-xs text-gray-700 dark:text-gray-300 min-w-0 truncate">
         <Terminal className="w-3.5 h-3.5 text-slate-700 dark:text-slate-300 animate-pulse shrink-0" />
         <Link href="/" className="font-semibold text-gray-900 dark:text-white shrink-0 hover:text-slate-600 dark:hover:text-slate-300 transition-colors">
-          hexctl
+          Wayne Obial
         </Link>
         {pageTitle && (
           <>

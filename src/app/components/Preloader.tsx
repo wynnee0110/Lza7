@@ -52,7 +52,7 @@ export default function Preloader({ minMs = 400 }: PreloaderProps) {
 
         {/* Minimalist Status Text */}
         <div className="flex items-center gap-1.5 text-xs text-gray-500 dark:text-gray-400">
-          <span className="font-semibold text-gray-900 dark:text-white">hexctl</span>
+          <span className="font-semibold text-gray-900 dark:text-white">Wayne Obial</span>
 
         </div>
       </div>

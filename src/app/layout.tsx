@@ -25,11 +25,11 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   metadataBase: new URL("https://hexctl.dev"),
   title: {
-    default: "Wayne Obial | Software Developer & Full-Stack Engineer (hexctl.dev)",
-    template: "%s | Wayne Obial — hexctl.dev",
+    default: "Wayne Obial | Software Developer & Full-Stack Engineer",
+    template: "%s | Wayne Obial",
   },
   description:
-    "Wayne Obial — Software Developer & Full-Stack Engineer. Discover portfolio projects, interactive simulations, and tech achievements on hexctl.dev.",
+    "Wayne Obial — Software Developer & Full-Stack Engineer. Discover portfolio projects, interactive simulations, and tech achievements.",
   keywords: [
     "Wayne Obial",
     "Wayne Obial portfolio",
@@ -37,9 +37,8 @@ export const metadata: Metadata = {
     "Wayne Obial engineer",
     "Wayne Obial developer",
     "Wayne Obial USTP",
-    "Wayne Obial hexctl",
-    "hexctl",
-    "hexctl.dev",
+    "Wayne Obial wynnee0110",
+    "wynnee0110",
     "full-stack developer",
     "software developer portfolio",
     "Wayne Obial projects",
@@ -54,10 +53,10 @@ export const metadata: Metadata = {
     type: "website",
     locale: "en_US",
     url: "https://hexctl.dev",
-    siteName: "hexctl.dev — Wayne Obial",
+    siteName: "Wayne Obial — Portfolio",
     title: "Wayne Obial | Software Developer & Full-Stack Engineer",
     description:
-      "Explore portfolio builds, algorithm visualizers, and web development projects by Wayne Obial on hexctl.dev.",
+      "Explore portfolio builds, algorithm visualizers, and web development projects by Wayne Obial.",
     images: [
       {
         url: "/images/Me.jpg",
@@ -69,7 +68,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Wayne Obial | Software Developer — hexctl.dev",
+    title: "Wayne Obial | Software Developer & Full-Stack Engineer",
     description:
       "Explore portfolio builds, algorithm visualizers, and software projects by Wayne Obial.",
     creator: "@Waynnneee1",
@@ -98,8 +97,7 @@ const jsonLd = {
       alternateName: [
         "Wayne Obial",
         "Jeruh John Wayne Llacuna Obial",
-        "hexctl",
-        "Wayne Obial hexctl",
+        "wynnee0110",
       ],
       url: "https://hexctl.dev",
       image: "https://hexctl.dev/images/Me.jpg",
@@ -121,7 +119,7 @@ const jsonLd = {
       "@type": "WebSite",
       "@id": "https://hexctl.dev/#website",
       url: "https://hexctl.dev",
-      name: "hexctl.dev — Wayne Obial Portfolio",
+      name: "Wayne Obial — Portfolio",
       description:
         "Official personal website and portfolio of Wayne Obial — Software Developer.",
       publisher: {
@@ -133,7 +131,7 @@ const jsonLd = {
       "@type": "ProfilePage",
       "@id": "https://hexctl.dev/#webpage",
       url: "https://hexctl.dev",
-      name: "Wayne Obial — Software Developer Portfolio (hexctl.dev)",
+      name: "Wayne Obial — Software Developer Portfolio",
       isPartOf: {
         "@id": "https://hexctl.dev/#website",
       },
