@@ -294,9 +294,7 @@ export default function HomePage() {
               {rightPanelView === "home" && (
                 <>
                   <article className="space-y-4">
-                    <h1 className="text-2xl sm:text-3xl font-bold tracking-tight text-gray-900 dark:text-white">
-                      Wayne Obial — <span className="text-slate-700 dark:text-slate-300 font-medium">Software Developer</span>
-                    </h1>
+
 
                     <div className="text-sm leading-relaxed text-gray-600 dark:text-gray-300 space-y-3 font-normal">
 
