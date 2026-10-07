@@ -2,6 +2,7 @@
 
 import Header from "../components/Header";
 import Footer from "../components/Footer";
+import CoolBackground from "../components/CoolBackground";
 import Link from "next/link";
 import { ArrowLeft, ArrowUpRight } from "lucide-react";
 import connect from "../data/connect.json";
@@ -20,7 +21,8 @@ const ICON_MAP: Record<string, IconType> = {
 
 function Page() {
   return (
-    <main className="overflow-y-auto [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none] min-h-[100svh] bg-gray-50 dark:bg-[#0a0a0a] text-gray-800 dark:text-gray-300 pb-10 transition-colors duration-300">
+    <main className="portfolio-bg relative isolate overflow-y-auto [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none] min-h-[100svh] text-gray-800 dark:text-gray-300 pb-10 transition-colors duration-300">
+      <CoolBackground />
       <Header pageTitle="social & profiles" />
 
       <div>
