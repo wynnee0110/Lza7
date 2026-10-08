@@ -432,7 +432,7 @@ export default function HomePage() {
                                   })()}
                                 </h3>
                                 {!isOpen && (
-                                  <p className="text-[11px] text-gray-400 dark:text-gray-500 mt-0.5 leading-relaxed line-clamp-1">
+                                  <p className="text-[11px] text-gray-600 dark:text-gray-400 mt-0.5 leading-relaxed line-clamp-1">
                                     {item.description}
                                   </p>
                                 )}
@@ -454,7 +454,7 @@ export default function HomePage() {
                                 }`}
                             >
                               <div className="pl-4 pr-3 pb-4 space-y-3">
-                                <p className="text-xs text-gray-500 dark:text-gray-400 leading-relaxed italic border-b border-black/8 dark:border-white/8 pb-2">
+                                <p className="text-xs text-gray-600 dark:text-gray-400 leading-relaxed italic border-b border-black/8 dark:border-white/8 pb-2">
                                   &quot;{item.description}&quot;
                                 </p>
                                 {(item as { highlights?: string[] }).highlights && (
