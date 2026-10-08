@@ -260,7 +260,7 @@ export default function HomePage() {
                   ← Home
                 </button>
               )}
-              <span className="text-gray-400 dark:text-gray-500 truncate">
+              <span className="text-gray-700 dark:text-gray-500 truncate">
                 {rightPanelView === "home"
                   ? "/* Overview */"
                   : rightPanelView === "projects"
