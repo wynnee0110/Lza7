@@ -72,5 +72,19 @@
       "Modules",
       "Exception Handling"
     ]
+  },
+  {
+    "title": "Programming Logic and Design Tutor",
+    "issuer": "ICpEP.SE - USTP",
+    "date": "October 2026",
+    "category": "Programming",
+    "description": "Served as a tutor for the Study Jam 2026 organized by ICpEP.SE - USTP, providing guidance and support to students in Programming Logic and Design.",
+    "credentialUrl": "#",
+    "image": "/images/certifications/Study Jam Certificate 2026 .png",
+    "skills": [
+      "C",
+      "Programming",
+      "Teaching"
+    ]
   }
 ]
