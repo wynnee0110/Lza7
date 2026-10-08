@@ -39,6 +39,33 @@ export default function HomePage() {
     }
   }, [rightPanelView]);
 
+  useEffect(() => {
+    const handleUrlTab = () => {
+      if (typeof window === "undefined") return;
+      const searchParams = new URLSearchParams(window.location.search);
+      const tab = searchParams.get("tab") || searchParams.get("view");
+      const hash = window.location.hash;
+      if (tab === "works" || tab === "projects" || hash === "#projects" || hash === "#works") {
+        setRightPanelView("projects");
+      } else if (tab === "certifications" || hash === "#certifications") {
+        setRightPanelView("certifications");
+      } else if (tab === "simulations" || hash === "#simulations") {
+        setSimulationsReady(true);
+        setRightPanelView("simulations");
+      } else if (tab === "resources" || hash === "#resources") {
+        setRightPanelView("resources");
+      }
+    };
+
+    handleUrlTab();
+    window.addEventListener("popstate", handleUrlTab);
+    window.addEventListener("hashchange", handleUrlTab);
+    return () => {
+      window.removeEventListener("popstate", handleUrlTab);
+      window.removeEventListener("hashchange", handleUrlTab);
+    };
+  }, []);
+
   const tooltipRef = useRef<HTMLDivElement | null>(null);
   const rafIdRef = useRef<number | null>(null);
 
@@ -81,8 +108,21 @@ export default function HomePage() {
       <header className="fixed top-3 left-1/2 -translate-x-1/2 z-50 w-[95%] sm:w-[92%] max-w-4xl flex items-center justify-between px-3.5 sm:px-5 py-2 rounded-full border border-black/10 dark:border-white/10 bg-white/50 dark:bg-[#161618]/70 backdrop-blur-md shadow-sm">
         <div className="flex items-center gap-2 font-mono text-xs text-gray-700 dark:text-gray-300 min-w-0 truncate">
           <Terminal className="w-3.5 h-3.5 text-slate-700 dark:text-slate-300 animate-pulse shrink-0" />
-          <span className="font-semibold text-gray-900 dark:text-white shrink-0">Wayne Obial</span>
+          <button
+            type="button"
+            onClick={() => {
+              setRightPanelView("home");
+              setExpandedExp(null);
+              if (typeof window !== "undefined") window.history.replaceState(null, "", "/");
+            }}
+            className="font-semibold text-gray-900 dark:text-white shrink-0 hover:text-slate-600 dark:hover:text-slate-300 transition-colors cursor-pointer"
+          >
+            Wayne Obial
+          </button>
           <span className="text-gray-400 dark:text-gray-500 shrink-0">/</span>
+          <span className="text-slate-800 dark:text-slate-200 font-medium truncate transition-all duration-200">
+            {rightPanelView === "projects" ? "works" : rightPanelView}
+          </span>
         </div>
 
         <div className="flex items-center gap-4 text-xs font-mono shrink-0">
@@ -233,7 +273,11 @@ export default function HomePage() {
 
             <div className="flex flex-wrap items-center gap-1.5 w-full sm:w-auto py-0.5">
               <button
-                onClick={() => { setRightPanelView("home"); setExpandedExp(null); }}
+                onClick={() => {
+                  setRightPanelView("home");
+                  setExpandedExp(null);
+                  if (typeof window !== "undefined") window.history.replaceState(null, "", "/");
+                }}
                 className={`px-3 py-1 rounded-md transition-all shrink-0 whitespace-nowrap ${rightPanelView === "home"
                   ? "text-slate-900 dark:text-slate-100 font-bold bg-slate-500/15 border border-slate-500/30 shadow-xs"
                   : "text-gray-500 hover:text-gray-800 dark:hover:text-gray-200"
@@ -242,7 +286,11 @@ export default function HomePage() {
                 home
               </button>
               <button
-                onClick={() => { setRightPanelView("projects"); setExpandedExp(null); }}
+                onClick={() => {
+                  setRightPanelView("projects");
+                  setExpandedExp(null);
+                  if (typeof window !== "undefined") window.history.replaceState(null, "", "/?tab=works");
+                }}
                 className={`px-3 py-1 rounded-md transition-all shrink-0 whitespace-nowrap ${rightPanelView === "projects"
                   ? "text-slate-900 dark:text-slate-100 font-bold bg-slate-500/15 border border-slate-500/30 shadow-xs"
                   : "text-gray-500 hover:text-gray-800 dark:hover:text-gray-200"
@@ -251,7 +299,11 @@ export default function HomePage() {
                 works
               </button>
               <button
-                onClick={() => { setRightPanelView("certifications"); setExpandedExp(null); }}
+                onClick={() => {
+                  setRightPanelView("certifications");
+                  setExpandedExp(null);
+                  if (typeof window !== "undefined") window.history.replaceState(null, "", "/?tab=certifications");
+                }}
                 className={`px-3 py-1 rounded-md transition-all shrink-0 whitespace-nowrap ${rightPanelView === "certifications"
                   ? "text-slate-900 dark:text-slate-100 font-bold bg-slate-500/15 border border-slate-500/30 shadow-xs"
                   : "text-gray-500 hover:text-gray-800 dark:hover:text-gray-200"
@@ -264,6 +316,7 @@ export default function HomePage() {
                   setSimulationsReady(true);
                   setRightPanelView("simulations");
                   setExpandedExp(null);
+                  if (typeof window !== "undefined") window.history.replaceState(null, "", "/?tab=simulations");
                 }}
                 className={`px-3 py-1 rounded-md transition-all shrink-0 whitespace-nowrap ${rightPanelView === "simulations"
                   ? "text-slate-900 dark:text-slate-100 font-bold bg-slate-500/15 border border-slate-500/30 shadow-xs"
@@ -273,7 +326,11 @@ export default function HomePage() {
                 simulations
               </button>
               <button
-                onClick={() => { setRightPanelView("resources"); setExpandedExp(null); }}
+                onClick={() => {
+                  setRightPanelView("resources");
+                  setExpandedExp(null);
+                  if (typeof window !== "undefined") window.history.replaceState(null, "", "/?tab=resources");
+                }}
                 className={`px-3 py-1 rounded-md transition-all shrink-0 whitespace-nowrap ${rightPanelView === "resources"
                   ? "text-slate-900 dark:text-slate-100 font-bold bg-slate-500/15 border border-slate-500/30 shadow-xs"
                   : "text-gray-500 hover:text-gray-800 dark:hover:text-gray-200"
