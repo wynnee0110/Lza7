@@ -10,7 +10,6 @@ export type Project = {
   category?: string;
   role?: string;
   year?: string;
-  status?: string;
   overview?: string;
   features?: string[];
   highlights?: string[];
@@ -29,7 +28,6 @@ export const projects: Project[] = [
     category: "Web Application",
     role: "Lead Full-Stack Developer",
     year: "2024",
-    status: "Active System",
     overview:
       "A comprehensive sports event management platform built to coordinate school athletics, inter-school tournaments, and team standings. The application replaces disorganized manual paperwork with automated bracket scheduling, real-time score broadcasts, and verified roster tracking.",
     features: [
@@ -56,7 +54,6 @@ export const projects: Project[] = [
     category: "Social Platform",
     role: "Full-Stack Developer",
     year: "2024",
-    status: "Live Production",
     overview:
       "A modern, community-driven social networking application engineered for seamless real-time conversation and content sharing. Designed with a clean, distraction-free aesthetic and high performance, archive allows members to post thoughts, upload media, curate profiles, and engage through comments and reactions.",
     features: [
@@ -83,7 +80,6 @@ export const projects: Project[] = [
     category: "Enterprise & AI",
     role: "Full-Stack Engineer",
     year: "2024",
-    status: "Enterprise Prototype",
     overview:
       "An intelligent Enterprise Resource Planning system created to eliminate operational friction and democratize business analytics. Integrated with Google Gemini API, non-technical team members can query complex databases using conversational plain text to extract business insights instantly.",
     features: [
@@ -110,7 +106,6 @@ export const projects: Project[] = [
     category: "Security & CLI Tool",
     role: "Author & Maintainer",
     year: "2024",
-    status: "Live / Open Source",
     overview:
       "A privacy-first terminal utility built for engineers who need to securely manage, organize, and retrieve sensitive environment variables, API tokens, and credentials right from their shell. VaultCli keeps encryption keys client-side, ensuring zero-knowledge cloud synchronization.",
     features: [
@@ -137,7 +132,6 @@ export const projects: Project[] = [
     category: "Entertainment Web App",
     role: "Full-Stack Developer",
     year: "2024",
-    status: "Live Demo",
     overview:
       "A curated movie catalog and discovery web application designed for film enthusiasts. Cinefy combines movie databases with high-speed Redis caching, personalized watchlist curation, and rich community reviews to deliver an immersive cinematic discovery experience.",
     features: [
@@ -164,7 +158,6 @@ export const projects: Project[] = [
     category: "AI & Developer Tooling",
     role: "Creator & Maintainer",
     year: "2024",
-    status: "Open Source",
     overview:
       "An open-source persistent memory abstraction engineered for autonomous AI agents. Cortex provides short-term conversation retention and long-term semantic knowledge retrieval, allowing LLM agents to maintain continuity, remember facts, and adapt to users over multiple sessions.",
     features: [
@@ -191,7 +184,6 @@ export const projects: Project[] = [
     category: "NPM Package & Utility",
     role: "Package Author",
     year: "2024",
-    status: "Published NPM Package",
     overview:
       "A lightweight, dependency-free TypeScript library for parsing, editing, and wiping EXIF metadata from image files. Built for both Node.js backends and browser runtimes, it empowers developers to inspect photograph telemetry or sanitize metadata to protect privacy.",
     features: [
@@ -218,7 +210,6 @@ export const projects: Project[] = [
     category: "Telegram Bot & Automation",
     role: "Developer",
     year: "2024",
-    status: "Active Bot",
     overview:
       "A handy developer companion bot built for the Telegram messenger ecosystem. Instead of switching tabs or launching terminals for routine dev tasks, engineers can send commands to convert timestamps, inspect tokens, and format payloads on the go.",
     features: [
@@ -253,7 +244,6 @@ export const projects: Project[] = [
     category: "Mobile App & Backend",
     role: "Lead Mobile & Backend Developer",
     year: "2024",
-    status: "Production (ICpEP.SE-USTP)",
     overview:
       "An end-to-end QR-based attendance tracking ecosystem created specifically for ICpEP.SE-USTP. Enables student officers to scan hundreds of event attendees in minutes while providing real-time verification and automated reporting.",
     features: [
@@ -286,7 +276,6 @@ export const projects: Project[] = [
     category: "AI & Automation",
     role: "Developer",
     year: "2024",
-    status: "Prototype / Utility",
     overview:
       "A conversational bot that converts natural human language inputs like 'team sync next Tuesday at 3pm' into scheduled events with alerts directly in Google Calendar. Built to streamline day-to-day agenda organization without tedious form entry.",
     features: [
@@ -313,7 +302,6 @@ export const projects: Project[] = [
     category: "Real-Time Web Application",
     role: "Full-Stack Developer",
     year: "2024",
-    status: "Live Demo",
     overview:
       "An ephemeral anonymous chat platform connecting strangers in pairs. Messages self-destruct after exchanging a set count, creating a spontaneous, privacy-centric conversation space without saved logs or histories.",
     features: [

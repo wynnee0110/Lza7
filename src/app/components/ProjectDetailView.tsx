@@ -126,12 +126,6 @@ export default function ProjectDetailView({
               <span className="px-2 py-0.5 border border-black/10 dark:border-white/10 bg-black/5 dark:bg-white/5">
                 {String(currentIndex + 1).padStart(2, "0")} / {String(totalProjects).padStart(2, "0")}
               </span>
-              {project.status && (
-                <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 border border-emerald-500/30 bg-emerald-500/10 text-emerald-700 dark:text-emerald-400 text-[10px] font-mono">
-                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
-                  {project.status}
-                </span>
-              )}
             </div>
           </div>
 
@@ -399,16 +393,6 @@ export default function ProjectDetailView({
                     </div>
                   )}
 
-                  {project.status && (
-                    <div className="flex items-start justify-between gap-2 border-b border-black/5 dark:border-white/5 pb-2">
-                      <span className="text-gray-500 dark:text-gray-400 shrink-0">
-                        Status
-                      </span>
-                      <span className="text-emerald-600 dark:text-emerald-400 font-medium">
-                        {project.status}
-                      </span>
-                    </div>
-                  )}
 
                   <div className="flex items-start justify-between gap-2 pt-1">
                     <span className="text-gray-500 dark:text-gray-400 shrink-0">
