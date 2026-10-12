@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 import dynamic from "next/dynamic";
 import ProjectsSection from "./components/ProjectsSection";
 import CertificationsSection from "./components/CertificationsSection";
@@ -45,7 +46,9 @@ export default function HomePage() {
       const searchParams = new URLSearchParams(window.location.search);
       const tab = searchParams.get("tab") || searchParams.get("view");
       const hash = window.location.hash;
-      if (tab === "works" || tab === "projects" || hash === "#projects" || hash === "#works") {
+      if (tab === "about" || hash === "#about") {
+        window.location.href = "/about";
+      } else if (tab === "works" || tab === "projects" || hash === "#projects" || hash === "#works") {
         setRightPanelView("projects");
       } else if (tab === "certifications" || hash === "#certifications") {
         setRightPanelView("certifications");
@@ -216,7 +219,17 @@ export default function HomePage() {
                 <span className="font-medium text-gray-700 dark:text-gray-300">Joined</span>
                 <span className="font-bold text-gray-900 dark:text-white">{stats.joinedYear}</span>
               </div>
-
+              <Link
+                href="/about"
+                className="flex justify-between items-center py-1 px-2.5 rounded-lg hover:bg-black/5 dark:hover:bg-white/5 transition-colors group"
+              >
+                <span className="font-medium text-gray-700 dark:text-gray-300 group-hover:text-gray-900 dark:group-hover:text-white transition-colors">
+                  About Me
+                </span>
+                <span className="text-slate-800 dark:text-slate-200 group-hover:text-slate-600 dark:group-hover:text-slate-400 flex items-center gap-0.5 group-hover:underline">
+                  Read <ArrowUpRight className="w-3 h-3" />
+                </span>
+              </Link>
             </div>
 
             {/* Social Links — Projects & Simulations excluded (shown in top nav) */}

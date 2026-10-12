@@ -68,7 +68,7 @@ export default function ResourcesSection() {
                         target={item.isDownload ? "_self" : "_blank"}
                         rel={item.isDownload ? undefined : "noopener noreferrer"}
                         download={item.isDownload ? true : undefined}
-                        className="font-semibold text-sm text-gray-900 dark:text-gray-100 hover:text-blue-600 dark:hover:text-blue-400 underline decoration-gray-300 dark:decoration-gray-600 underline-offset-2 transition-colors inline-flex items-center gap-1 truncate"
+                        className="font-semibold text-sm text-gray-900 dark:text-gray-100 hover:text-blue-600 dark:hover:text-blue-400 underline decoration-black dark:decoration-gray-600 underline-offset-2 transition-colors inline-flex items-center gap-1 truncate"
                       >
                         <span className="truncate">{item.title}</span>
                         {item.isDownload ? (
