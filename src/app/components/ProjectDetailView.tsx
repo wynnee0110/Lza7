@@ -214,67 +214,18 @@ export default function ProjectDetailView({
             </div>
           </section>
 
-          {/* Project Preview Showcase Card */}
+          {/* Project Preview Showcase Image */}
           <section className="mb-12">
-            <div className="border border-black/15 dark:border-white/15 bg-black/5 dark:bg-white/5 overflow-hidden shadow-lg backdrop-blur-sm">
-              {/* Window Terminal Header Bar */}
-              <div className="flex items-center justify-between px-3.5 py-2 border-b border-black/10 dark:border-white/10 bg-white/80 dark:bg-black/40 text-[11px] font-mono">
-                <div className="flex items-center gap-1.5">
-                  <span className="w-2.5 h-2.5 rounded-full bg-red-500/80 inline-block" />
-                  <span className="w-2.5 h-2.5 rounded-full bg-amber-500/80 inline-block" />
-                  <span className="w-2.5 h-2.5 rounded-full bg-emerald-500/80 inline-block" />
-                  <span className="ml-2 text-gray-500 dark:text-gray-400 hidden sm:inline">
-                    preview://{project.slug}
-                  </span>
-                </div>
-                <div className="text-gray-500 dark:text-gray-400 truncate max-w-[200px]">
-                  {project.title}
-                </div>
-              </div>
-
-              {/* Showcase Image */}
-              <div className="relative aspect-[16/10] sm:aspect-[16/9] w-full min-w-0 bg-neutral-900/5 dark:bg-black/40">
-                <Image
-                  src={imgSrc}
-                  alt={project.title}
-                  fill
-                  priority
-                  sizes="(max-width: 768px) 100vw, 896px"
-                  className="object-cover object-center"
-                  onError={() => setImgSrc(FALLBACK)}
-                />
-              </div>
-
-              {/* Status / Quick Tags Footer Bar */}
-              {project.languages && project.languages.length > 0 && (
-                <div className="px-4 py-2.5 bg-white/80 dark:bg-black/40 border-t border-black/10 dark:border-white/10 flex flex-wrap items-center justify-between gap-2 text-xs font-mono">
-                  <div className="flex items-center gap-1.5 flex-wrap">
-                    <span className="text-[10px] uppercase text-gray-400 dark:text-gray-500 mr-1">
-                      Stack:
-                    </span>
-                    {project.languages.map((tech, i) => (
-                      <span
-                        key={i}
-                        className="px-2 py-0.5 text-[10px] bg-black/5 dark:bg-white/10 border border-black/10 dark:border-white/10 text-gray-800 dark:text-gray-200"
-                      >
-                        {tech}
-                      </span>
-                    ))}
-                  </div>
-
-                  {hasLiveLink && (
-                    <a
-                      href={project.link}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-[11px] text-slate-800 dark:text-emerald-400 hover:underline flex items-center gap-1"
-                    >
-                      <span>launch project</span>
-                      <ExternalLink className="w-3 h-3" />
-                    </a>
-                  )}
-                </div>
-              )}
+            <div className="relative aspect-[16/10] sm:aspect-[16/9] w-full min-w-0 overflow-hidden border border-black/15 dark:border-white/15 bg-neutral-900/5 dark:bg-black/40 shadow-sm">
+              <Image
+                src={imgSrc}
+                alt={project.title}
+                fill
+                priority
+                sizes="(max-width: 768px) 100vw, 896px"
+                className="object-cover object-center"
+                onError={() => setImgSrc(FALLBACK)}
+              />
             </div>
           </section>
 
