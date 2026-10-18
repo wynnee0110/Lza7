@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState, useMemo } from "react";
-import { FiGithub, FiExternalLink, FiRefreshCw } from "react-icons/fi";
+import { FiGithub, FiRefreshCw } from "react-icons/fi";
 import { ContributionDay, GitHubContributionsResponse } from "../api/github-contributions/route";
 
 function formatTooltipDate(dateStr: string): string {

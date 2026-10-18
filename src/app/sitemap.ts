@@ -1,5 +1,6 @@
 import type { MetadataRoute } from "next";
 import { projects } from "./data/projectsData";
+import { blogPosts } from "./data/blogData";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = "https://hexctl.dev";
@@ -10,6 +11,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
     lastModified,
     changeFrequency: "monthly",
     priority: 0.7,
+  }));
+
+  const blogRoutes: MetadataRoute.Sitemap = blogPosts.map((post) => ({
+    url: `${baseUrl}/blog/${post.slug}`,
+    lastModified: new Date(post.date),
+    changeFrequency: "monthly",
+    priority: 0.8,
   }));
 
   return [
@@ -32,6 +40,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.8,
     },
     ...projectRoutes,
+    {
+      url: `${baseUrl}/blog`,
+      lastModified,
+      changeFrequency: "weekly",
+      priority: 0.85,
+    },
+    ...blogRoutes,
     {
       url: `${baseUrl}/social`,
       lastModified,

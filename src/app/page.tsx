@@ -7,6 +7,8 @@ import ProjectsSection from "./components/ProjectsSection";
 import CertificationsSection from "./components/CertificationsSection";
 import GitHubContributionTracker from "./components/GitHubContributionTracker";
 import ResourcesSection from "./components/ResourcesSection";
+import BlogSection from "./components/BlogSection";
+import { blogPosts } from "./data/blogData";
 
 // Lazy Load Heavy WebGL & Simulation Components (No SSR)
 const Reactdiff = dynamic(() => import("./components/Reactdiff"), { ssr: false });
@@ -26,13 +28,34 @@ import { useEffect, useState, useRef } from "react";
 import FloatingButton from "./components/FloatingButton";
 import BackToTop from "./components/BackToTop";
 
-type RightPanelView = "home" | "projects" | "certifications" | "simulations" | "resources";
+type RightPanelView = "home" | "projects" | "certifications" | "simulations" | "resources" | "blog";
 
 export default function HomePage() {
   const [rightPanelView, setRightPanelView] = useState<RightPanelView>("home");
   const [simulationsReady, setSimulationsReady] = useState(false);
   const [expandedExp, setExpandedExp] = useState<number | null>(null);
   const scrollContainerRef = useRef<HTMLDivElement>(null);
+
+  const switchTab = (tab: RightPanelView) => {
+    setRightPanelView(tab);
+    setExpandedExp(null);
+    if (tab === "simulations") {
+      setSimulationsReady(true);
+    }
+    if (typeof window !== "undefined") {
+      const url = tab === "home" ? "/" : `/?tab=${tab === "projects" ? "works" : tab}`;
+      window.history.pushState({ tab }, "", url);
+    }
+  };
+
+  const navTabs: { id: RightPanelView; label: string }[] = [
+    { id: "home", label: "home" },
+    { id: "projects", label: "works" },
+    { id: "certifications", label: "certifications" },
+    { id: "blog", label: "blog" },
+    { id: "simulations", label: "simulations" },
+    { id: "resources", label: "resources" },
+  ];
 
   useEffect(() => {
     if (scrollContainerRef.current) {
@@ -47,7 +70,7 @@ export default function HomePage() {
       const tab = searchParams.get("tab") || searchParams.get("view");
       const hash = window.location.hash;
       if (tab === "about" || hash === "#about") {
-        window.location.href = "/about";
+        setRightPanelView("home");
       } else if (tab === "works" || tab === "projects" || hash === "#projects" || hash === "#works") {
         setRightPanelView("projects");
       } else if (tab === "certifications" || hash === "#certifications") {
@@ -57,6 +80,10 @@ export default function HomePage() {
         setRightPanelView("simulations");
       } else if (tab === "resources" || hash === "#resources") {
         setRightPanelView("resources");
+      } else if (tab === "blog" || hash === "#blog") {
+        setRightPanelView("blog");
+      } else {
+        setRightPanelView("home");
       }
     };
 
@@ -113,11 +140,7 @@ export default function HomePage() {
           <Terminal className="w-3.5 h-3.5 text-slate-700 dark:text-slate-300 animate-pulse shrink-0" />
           <button
             type="button"
-            onClick={() => {
-              setRightPanelView("home");
-              setExpandedExp(null);
-              if (typeof window !== "undefined") window.history.replaceState(null, "", "/");
-            }}
+            onClick={() => switchTab("home")}
             className="font-semibold text-gray-900 dark:text-white shrink-0 hover:text-slate-600 dark:hover:text-slate-300 transition-colors cursor-pointer"
           >
             Wayne Obial
@@ -133,8 +156,39 @@ export default function HomePage() {
         </div>
       </header>
 
+      {/* Right-Side Vertical Page Selector (Just Text Vertical) */}
+      <nav
+        aria-label="Page Selector"
+        className="fixed right-3 sm:right-6 lg:right-8 xl:right-12 top-1/2 -translate-y-1/2 z-40 flex flex-col items-end gap-3 font-mono text-xs select-none"
+      >
+        {navTabs.map((tab) => {
+          const isActive = rightPanelView === tab.id;
+          return (
+            <button
+              key={tab.id}
+              type="button"
+              onClick={() => switchTab(tab.id)}
+              className={`group flex items-center justify-end gap-2 text-right transition-all duration-150 cursor-pointer ${
+                isActive
+                  ? "text-gray-950 dark:text-white font-bold tracking-tight"
+                  : "text-gray-600 dark:text-gray-300 hover:text-gray-950 dark:hover:text-white"
+              }`}
+            >
+              <span className="tracking-wide">{tab.label}</span>
+              <span
+                className={`transition-all duration-200 ${
+                  isActive
+                    ? "w-3 sm:w-4 h-0.5 bg-gray-950 dark:bg-white"
+                    : "w-1.5 h-0.5 bg-gray-400 dark:bg-gray-500 group-hover:w-2.5 group-hover:bg-gray-900 dark:group-hover:bg-gray-200"
+                }`}
+              />
+            </button>
+          );
+        })}
+      </nav>
+
       {/* Main Workspace Layout */}
-      <section className="pt-20 pb-12 max-w-4xl mx-auto px-4 lg:px-6 relative z-10 w-full flex-1 flex flex-col md:flex-row gap-6 items-start justify-start">
+      <section className="pt-20 pb-12 max-w-4xl mx-auto px-4 pr-24 sm:pr-28 md:px-6 relative z-10 w-full flex-1 flex flex-col md:flex-row gap-6 items-start justify-start">
 
         {/* LEFT UNTOUCHED SIDEBAR - Shown only on Home view */}
         {rightPanelView === "home" && (
@@ -219,6 +273,18 @@ export default function HomePage() {
                 <span className="font-medium text-gray-700 dark:text-gray-300">Joined</span>
                 <span className="font-bold text-gray-900 dark:text-white">{stats.joinedYear}</span>
               </div>
+              <button
+                type="button"
+                onClick={() => switchTab("blog")}
+                className="w-full flex justify-between items-center py-1 px-2.5 rounded-lg hover:bg-black/5 dark:hover:bg-white/5 transition-colors group cursor-pointer text-left"
+              >
+                <span className="font-medium text-gray-700 dark:text-gray-300 group-hover:text-gray-900 dark:group-hover:text-white transition-colors">
+                  Articles
+                </span>
+                <span className="text-slate-800 dark:text-slate-200 group-hover:text-slate-600 dark:group-hover:text-slate-400 flex items-center gap-0.5 group-hover:underline">
+                  {blogPosts.length} <ArrowUpRight className="w-3 h-3" />
+                </span>
+              </button>
               <Link
                 href="/about"
                 className="flex justify-between items-center py-1 px-2.5 rounded-lg hover:bg-black/5 dark:hover:bg-white/5 transition-colors group"
@@ -261,98 +327,6 @@ export default function HomePage() {
 
         {/* REFACTORED MINIMAL MAIN CONTENT AREA */}
         <div className="flex-1 flex flex-col min-h-0 min-w-0 w-full">
-
-          {/* Minimalist View Switcher Navigation */}
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-3 mb-6 border-b border-black/10 dark:border-white/10 font-mono text-xs w-full min-w-0">
-            <div className="flex items-center gap-3 min-w-0">
-              {rightPanelView !== "home" && (
-                <button
-                  onClick={() => { setRightPanelView("home"); setExpandedExp(null); }}
-                  className="text-slate-800 dark:text-slate-200 hover:underline font-semibold shrink-0"
-                >
-                  ← Home
-                </button>
-              )}
-              <span className="text-gray-700 dark:text-gray-500 truncate">
-                {rightPanelView === "home"
-                  ? "/* Overview */"
-                  : rightPanelView === "projects"
-                    ? "/* Portfolio Builds */"
-                    : rightPanelView === "certifications"
-                      ? "/* Verified Credentials */"
-                      : "/* Math Models */"}
-              </span>
-            </div>
-
-            <div className="flex flex-wrap items-center gap-1.5 w-full sm:w-auto py-0.5">
-              <button
-                onClick={() => {
-                  setRightPanelView("home");
-                  setExpandedExp(null);
-                  if (typeof window !== "undefined") window.history.replaceState(null, "", "/");
-                }}
-                className={`px-3 py-1 rounded-md transition-all shrink-0 whitespace-nowrap ${rightPanelView === "home"
-                  ? "text-slate-900 dark:text-slate-100 font-bold bg-slate-500/15 border border-slate-500/30 shadow-xs"
-                  : "text-gray-500 hover:text-gray-800 dark:hover:text-gray-200"
-                  }`}
-              >
-                home
-              </button>
-              <button
-                onClick={() => {
-                  setRightPanelView("projects");
-                  setExpandedExp(null);
-                  if (typeof window !== "undefined") window.history.replaceState(null, "", "/?tab=works");
-                }}
-                className={`px-3 py-1 rounded-md transition-all shrink-0 whitespace-nowrap ${rightPanelView === "projects"
-                  ? "text-slate-900 dark:text-slate-100 font-bold bg-slate-500/15 border border-slate-500/30 shadow-xs"
-                  : "text-gray-500 hover:text-gray-800 dark:hover:text-gray-200"
-                  }`}
-              >
-                works
-              </button>
-              <button
-                onClick={() => {
-                  setRightPanelView("certifications");
-                  setExpandedExp(null);
-                  if (typeof window !== "undefined") window.history.replaceState(null, "", "/?tab=certifications");
-                }}
-                className={`px-3 py-1 rounded-md transition-all shrink-0 whitespace-nowrap ${rightPanelView === "certifications"
-                  ? "text-slate-900 dark:text-slate-100 font-bold bg-slate-500/15 border border-slate-500/30 shadow-xs"
-                  : "text-gray-500 hover:text-gray-800 dark:hover:text-gray-200"
-                  }`}
-              >
-                certifications
-              </button>
-              <button
-                onClick={() => {
-                  setSimulationsReady(true);
-                  setRightPanelView("simulations");
-                  setExpandedExp(null);
-                  if (typeof window !== "undefined") window.history.replaceState(null, "", "/?tab=simulations");
-                }}
-                className={`px-3 py-1 rounded-md transition-all shrink-0 whitespace-nowrap ${rightPanelView === "simulations"
-                  ? "text-slate-900 dark:text-slate-100 font-bold bg-slate-500/15 border border-slate-500/30 shadow-xs"
-                  : "text-gray-500 hover:text-gray-800 dark:hover:text-gray-200"
-                  }`}
-              >
-                simulations
-              </button>
-              <button
-                onClick={() => {
-                  setRightPanelView("resources");
-                  setExpandedExp(null);
-                  if (typeof window !== "undefined") window.history.replaceState(null, "", "/?tab=resources");
-                }}
-                className={`px-3 py-1 rounded-md transition-all shrink-0 whitespace-nowrap ${rightPanelView === "resources"
-                  ? "text-slate-900 dark:text-slate-100 font-bold bg-slate-500/15 border border-slate-500/30 shadow-xs"
-                  : "text-gray-500 hover:text-gray-800 dark:hover:text-gray-200"
-                  }`}
-              >
-                resources
-              </button>
-            </div>
-          </div>
           {/* Scrollable Main Content Stream */}
           <div
             ref={scrollContainerRef}
@@ -628,6 +602,12 @@ export default function HomePage() {
               {rightPanelView === "resources" && (
                 <section className="space-y-4">
                   <ResourcesSection />
+                </section>
+              )}
+              {/* BLOG COMPONENT */}
+              {rightPanelView === "blog" && (
+                <section className="space-y-4">
+                  <BlogSection />
                 </section>
               )}
             </div>
