@@ -156,10 +156,10 @@ export default function HomePage() {
         </div>
       </header>
 
-      {/* Right-Side Vertical Page Selector (Just Text Vertical) */}
+      {/* Right-Side Vertical Page Selector (Desktop only) */}
       <nav
         aria-label="Page Selector"
-        className="fixed right-3 sm:right-6 lg:right-8 xl:right-12 top-1/2 -translate-y-1/2 z-40 flex flex-col items-end gap-3 font-mono text-xs select-none"
+        className="hidden md:flex fixed right-3 sm:right-6 lg:right-8 xl:right-12 top-1/2 -translate-y-1/2 z-40 flex-col items-end gap-3 font-mono text-xs select-none"
       >
         {navTabs.map((tab) => {
           const isActive = rightPanelView === tab.id;
@@ -188,7 +188,7 @@ export default function HomePage() {
       </nav>
 
       {/* Main Workspace Layout */}
-      <section className="pt-20 pb-12 max-w-4xl mx-auto px-4 pr-24 sm:pr-28 md:px-6 relative z-10 w-full flex-1 flex flex-col md:flex-row gap-6 items-start justify-start">
+      <section className="pt-20 pb-12 max-w-4xl mx-auto px-4 md:px-6 relative z-10 w-full flex-1 flex flex-col md:flex-row gap-6 items-start justify-start">
 
         {/* LEFT UNTOUCHED SIDEBAR - Shown only on Home view */}
         {rightPanelView === "home" && (
@@ -327,6 +327,38 @@ export default function HomePage() {
 
         {/* REFACTORED MINIMAL MAIN CONTENT AREA */}
         <div className="flex-1 flex flex-col min-h-0 min-w-0 w-full">
+          {/* Mobile View Switcher Tabs (Linear/GitHub style) */}
+          <div className="md:hidden border-b border-black/10 dark:border-white/10 mb-6 font-mono text-xs w-full min-w-0">
+            <nav
+              aria-label="Mobile Workspace Navigation"
+              className="flex items-center gap-1 overflow-x-auto [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden -mb-px w-full"
+            >
+              {navTabs.map((tab) => {
+                const isActive = rightPanelView === tab.id;
+                return (
+                  <button
+                    key={tab.id}
+                    type="button"
+                    onClick={() => switchTab(tab.id)}
+                    className={`group relative flex items-center gap-1.5 px-2.5 py-2 text-xs font-mono transition-all duration-150 shrink-0 select-none cursor-pointer ${
+                      isActive
+                        ? "text-gray-950 dark:text-white font-bold"
+                        : "text-gray-600 dark:text-gray-300 hover:text-gray-950 dark:hover:text-white"
+                    }`}
+                  >
+                    <span>{tab.label}</span>
+                    {/* Active sliding bottom indicator line */}
+                    {isActive ? (
+                      <span className="absolute bottom-0 left-0 right-0 h-[2px] bg-gray-950 dark:bg-white" />
+                    ) : (
+                      <span className="absolute bottom-0 left-0 right-0 h-[2px] bg-transparent group-hover:bg-black/20 dark:group-hover:bg-white/20 transition-colors" />
+                    )}
+                  </button>
+                );
+              })}
+            </nav>
+          </div>
+
           {/* Scrollable Main Content Stream */}
           <div
             ref={scrollContainerRef}
