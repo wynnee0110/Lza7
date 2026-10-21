@@ -86,6 +86,8 @@ export default function ProjectDetailView({
           <Terminal className="w-3.5 h-3.5 text-slate-700 dark:text-slate-300 animate-pulse shrink-0" />
           <Link
             href="/"
+            aria-keyshortcuts="1"
+            title="Wayne Obial — Home (Press 1)"
             className="font-semibold text-gray-900 dark:text-white shrink-0 hover:text-slate-600 dark:hover:text-slate-300 transition-colors"
           >
             Wayne Obial
@@ -93,6 +95,8 @@ export default function ProjectDetailView({
           <span className="text-gray-400 dark:text-gray-500 shrink-0">/</span>
           <Link
             href="/?tab=works"
+            aria-keyshortcuts="2"
+            title="Works (Press 2)"
             className="text-gray-500 dark:text-gray-400 hover:text-slate-700 dark:hover:text-slate-300 transition-colors shrink-0"
           >
             works

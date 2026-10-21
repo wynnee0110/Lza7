@@ -24,19 +24,29 @@ import stats from "./data/stats.json";
 import { projects } from "./data/projectsData";
 import { Cpu, Brain, Terminal, ArrowUpRight, ChevronDown } from "lucide-react";
 import { FaPython, FaReact } from "react-icons/fa";
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState, useRef, useCallback } from "react";
 import FloatingButton from "./components/FloatingButton";
 import BackToTop from "./components/BackToTop";
 
 type RightPanelView = "home" | "projects" | "certifications" | "simulations" | "resources" | "blog";
 
+const navTabs: { id: RightPanelView; label: string; shortcut: string }[] = [
+  { id: "home", label: "home", shortcut: "1" },
+  { id: "projects", label: "works", shortcut: "2" },
+  { id: "certifications", label: "certifications", shortcut: "3" },
+  { id: "blog", label: "blog", shortcut: "4" },
+  { id: "simulations", label: "simulations", shortcut: "5" },
+  { id: "resources", label: "resources", shortcut: "6" },
+];
+
 export default function HomePage() {
   const [rightPanelView, setRightPanelView] = useState<RightPanelView>("home");
   const [simulationsReady, setSimulationsReady] = useState(false);
   const [expandedExp, setExpandedExp] = useState<number | null>(null);
+  const [activeShortcut, setActiveShortcut] = useState<string | null>(null);
   const scrollContainerRef = useRef<HTMLDivElement>(null);
 
-  const switchTab = (tab: RightPanelView) => {
+  const switchTab = useCallback((tab: RightPanelView) => {
     setRightPanelView(tab);
     setExpandedExp(null);
     if (tab === "simulations") {
@@ -46,16 +56,7 @@ export default function HomePage() {
       const url = tab === "home" ? "/" : `/?tab=${tab === "projects" ? "works" : tab}`;
       window.history.pushState({ tab }, "", url);
     }
-  };
-
-  const navTabs: { id: RightPanelView; label: string }[] = [
-    { id: "home", label: "home" },
-    { id: "projects", label: "works" },
-    { id: "certifications", label: "certifications" },
-    { id: "blog", label: "blog" },
-    { id: "simulations", label: "simulations" },
-    { id: "resources", label: "resources" },
-  ];
+  }, []);
 
   useEffect(() => {
     if (scrollContainerRef.current) {
@@ -95,6 +96,50 @@ export default function HomePage() {
       window.removeEventListener("hashchange", handleUrlTab);
     };
   }, []);
+
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      // Do not trigger if modifier keys (Ctrl, Meta/Cmd, Alt, Shift) are held
+      if (e.ctrlKey || e.metaKey || e.altKey || e.shiftKey) return;
+
+      // Do not trigger if the user is typing in an input or editable field
+      const target = e.target as HTMLElement | null;
+      if (
+        target &&
+        (target.tagName === "INPUT" ||
+          target.tagName === "TEXTAREA" ||
+          target.tagName === "SELECT" ||
+          target.isContentEditable ||
+          target.closest("input, textarea, select, [contenteditable='true']"))
+      ) {
+        return;
+      }
+
+      // Check digit keys 1-6 (standard number row & numpad)
+      const numFromDigit = e.code?.match(/^Digit([1-6])$/)?.[1];
+      const numFromNumpad = e.code?.match(/^Numpad([1-6])$/)?.[1];
+      const numFromKey = ["1", "2", "3", "4", "5", "6"].includes(e.key) ? e.key : null;
+      const shortcutNum = numFromDigit || numFromNumpad || numFromKey;
+
+      if (shortcutNum) {
+        const tabIndex = parseInt(shortcutNum, 10) - 1;
+        if (tabIndex >= 0 && tabIndex < navTabs.length) {
+          e.preventDefault();
+          const targetTab = navTabs[tabIndex].id;
+          switchTab(targetTab);
+
+          // Visual feedback pulse on the pressed shortcut badge
+          setActiveShortcut(shortcutNum);
+          setTimeout(() => {
+            setActiveShortcut((current) => (current === shortcutNum ? null : current));
+          }, 300);
+        }
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [switchTab]);
 
   const tooltipRef = useRef<HTMLDivElement | null>(null);
   const rafIdRef = useRef<number | null>(null);
@@ -141,6 +186,8 @@ export default function HomePage() {
           <button
             type="button"
             onClick={() => switchTab("home")}
+            aria-keyshortcuts="1"
+            title="Wayne Obial — Home (Press 1)"
             className="font-semibold text-gray-900 dark:text-white shrink-0 hover:text-slate-600 dark:hover:text-slate-300 transition-colors cursor-pointer"
           >
             Wayne Obial
@@ -163,17 +210,31 @@ export default function HomePage() {
       >
         {navTabs.map((tab) => {
           const isActive = rightPanelView === tab.id;
+          const isPressed = activeShortcut === tab.shortcut;
           return (
             <button
               key={tab.id}
               type="button"
               onClick={() => switchTab(tab.id)}
+              aria-keyshortcuts={tab.shortcut}
+              title={`Press ${tab.shortcut} to switch to ${tab.label}`}
               className={`group flex items-center justify-end gap-2 text-right transition-all duration-150 cursor-pointer ${
                 isActive
                   ? "text-gray-950 dark:text-white font-bold tracking-tight"
                   : "text-gray-600 dark:text-gray-300 hover:text-gray-950 dark:hover:text-white"
               }`}
             >
+              <span
+                className={`font-mono text-xs transition-all duration-150 ${
+                  isPressed
+                    ? "scale-125 text-gray-950 dark:text-white font-bold"
+                    : isActive
+                    ? "text-gray-950 dark:text-white font-bold"
+                    : "text-gray-400 dark:text-gray-500 group-hover:text-gray-950 dark:group-hover:text-white"
+                }`}
+              >
+                {tab.shortcut}
+              </span>
               <span className="tracking-wide">{tab.label}</span>
               <span
                 className={`transition-all duration-200 ${
@@ -335,17 +396,31 @@ export default function HomePage() {
             >
               {navTabs.map((tab) => {
                 const isActive = rightPanelView === tab.id;
+                const isPressed = activeShortcut === tab.shortcut;
                 return (
                   <button
                     key={tab.id}
                     type="button"
                     onClick={() => switchTab(tab.id)}
+                    aria-keyshortcuts={tab.shortcut}
+                    title={`Press ${tab.shortcut} to switch to ${tab.label}`}
                     className={`group relative flex items-center gap-1.5 px-2.5 py-2 text-xs font-mono transition-all duration-150 shrink-0 select-none cursor-pointer ${
                       isActive
                         ? "text-gray-950 dark:text-white font-bold"
                         : "text-gray-600 dark:text-gray-300 hover:text-gray-950 dark:hover:text-white"
                     }`}
                   >
+                    <span
+                      className={`font-mono text-xs transition-all duration-150 ${
+                        isPressed
+                          ? "scale-125 text-gray-950 dark:text-white font-bold"
+                          : isActive
+                          ? "text-gray-950 dark:text-white font-bold"
+                          : "text-gray-400 dark:text-gray-500 group-hover:text-gray-950 dark:group-hover:text-white"
+                      }`}
+                    >
+                      {tab.shortcut}
+                    </span>
                     <span>{tab.label}</span>
                     {/* Active sliding bottom indicator line */}
                     {isActive ? (

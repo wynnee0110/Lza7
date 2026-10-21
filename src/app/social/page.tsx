@@ -39,6 +39,8 @@ function Page() {
               <div>
                 <Link
                   href="/"
+                  aria-keyshortcuts="1"
+                  title="Back to Workspace (Press 1)"
                   className="inline-flex items-center gap-2 text-sm text-slate-800 dark:text-slate-200 hover:text-slate-600 dark:hover:text-slate-400 transition-colors mb-4 font-medium"
                 >
                   <ArrowLeft className="w-4 h-4" />

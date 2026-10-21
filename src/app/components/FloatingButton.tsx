@@ -150,6 +150,14 @@ export default function FloatingButton() {
                     <InfoChip label="Theme" value="Dark / Light" />
                 </div>
 
+                {/* Keyboard Shortcuts */}
+                <div className="px-3 py-2 rounded-lg bg-gray-100 dark:bg-white/[0.03] border border-gray-200 dark:border-white/[0.07] flex items-center justify-between">
+                    <span className="text-[9px] font-mono text-gray-400 dark:text-gray-600 uppercase tracking-widest">Keyboard Nav</span>
+                    <span className="text-[10px] font-mono font-medium text-gray-700 dark:text-gray-300">
+                        1–6 switch pages
+                    </span>
+                </div>
+
                 {/* Repo link */}
                 <a
                     href={SITE_META.repo}

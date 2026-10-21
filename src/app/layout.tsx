@@ -3,6 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Preloader from "./components/Preloader";
 import { ThemeProvider } from "next-themes";
+import GlobalKeyboardNav from "./components/GlobalKeyboardNav";
 
 
 
@@ -162,6 +163,7 @@ export default function RootLayout({
         <Preloader minMs={800} />
 
         <ThemeProvider attribute="class" enableSystem defaultTheme="system">
+          <GlobalKeyboardNav />
           {children}
         </ThemeProvider>
       </body>

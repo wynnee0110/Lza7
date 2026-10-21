@@ -88,7 +88,14 @@ export default function SimulationPage() {
           <Terminal className="w-3.5 h-3.5 text-slate-700 dark:text-slate-300 animate-pulse shrink-0" />
           <span className="font-semibold text-gray-900 dark:text-white shrink-0">Wayne Obial</span>
           <span className="text-gray-400 dark:text-gray-500 shrink-0">/</span>
-          <Link href="/" className="text-gray-500 dark:text-gray-400 hover:text-slate-700 dark:hover:text-slate-300 transition-colors shrink-0">portfolio</Link>
+          <Link
+            href="/"
+            aria-keyshortcuts="1"
+            title="Home (Press 1)"
+            className="text-gray-500 dark:text-gray-400 hover:text-slate-700 dark:hover:text-slate-300 transition-colors shrink-0"
+          >
+            portfolio
+          </Link>
           <span className="text-gray-400 dark:text-gray-500 shrink-0">/</span>
           <span className="text-slate-800 dark:text-slate-200 font-medium truncate">simulation</span>
         </div>

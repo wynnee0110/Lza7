@@ -85,6 +85,8 @@ export default function BlogDetailView({
         <div className="flex items-center gap-2 text-gray-700 dark:text-gray-300 min-w-0 truncate">
           <Link
             href="/"
+            aria-keyshortcuts="1"
+            title="Wayne Obial — Home (Press 1)"
             className="font-semibold text-gray-900 dark:text-white hover:underline shrink-0"
           >
             Wayne Obial
@@ -92,6 +94,8 @@ export default function BlogDetailView({
           <span className="text-gray-400 dark:text-gray-500 shrink-0">/</span>
           <Link
             href="/?tab=blog"
+            aria-keyshortcuts="4"
+            title="Blog (Press 4)"
             className="text-gray-500 hover:text-gray-900 dark:hover:text-white hover:underline shrink-0"
           >
             blog
