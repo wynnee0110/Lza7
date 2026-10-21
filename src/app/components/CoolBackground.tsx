@@ -8,7 +8,11 @@ const LiquidChrome = dynamic(() => import("@/components/LiquidChrome"), {
   ssr: false,
 });
 
-export default function CoolBackground() {
+interface CoolBackgroundProps {
+  interactive?: boolean;
+}
+
+export default function CoolBackground({ interactive = false }: CoolBackgroundProps) {
   const { resolvedTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
 
@@ -33,7 +37,7 @@ export default function CoolBackground() {
         amplitude={0.25}
         frequencyX={2.5}
         frequencyY={2.5}
-        interactive={true}
+        interactive={interactive}
         className="w-full h-full opacity-70 dark:opacity-50 transition-opacity duration-700"
       />
     </div>

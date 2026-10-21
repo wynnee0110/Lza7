@@ -11,7 +11,7 @@ export const LiquidChrome = ({
   amplitude = 0.3,
   frequencyX = 3,
   frequencyY = 3,
-  interactive = true,
+  interactive = false,
   className = '',
   style = {},
   ...props
@@ -45,22 +45,28 @@ export const LiquidChrome = ({
       uniform float uFrequencyX;
       uniform float uFrequencyY;
       uniform vec2 uMouse;
+      uniform float uInteractive;
       varying vec2 vUv;
 
       vec4 renderImage(vec2 uvCoord) {
           vec2 fragCoord = uvCoord * uResolution.xy;
           vec2 uv = (2.0 * fragCoord - uResolution.xy) / min(uResolution.x, uResolution.y);
 
+          float mx = uInteractive * uMouse.x * 3.14159;
+          float my = uInteractive * uMouse.y * 3.14159;
+
           for (float i = 1.0; i < 10.0; i++){
-              uv.x += uAmplitude / i * cos(i * uFrequencyX * uv.y + uTime + uMouse.x * 3.14159);
-              uv.y += uAmplitude / i * cos(i * uFrequencyY * uv.x + uTime + uMouse.y * 3.14159);
+              uv.x += uAmplitude / i * cos(i * uFrequencyX * uv.y + uTime + mx);
+              uv.y += uAmplitude / i * cos(i * uFrequencyY * uv.x + uTime + my);
           }
 
-          vec2 diff = (uvCoord - uMouse);
-          float dist = length(diff);
-          float falloff = exp(-dist * 20.0);
-          float ripple = sin(10.0 * dist - uTime * 2.0) * 0.03;
-          uv += (diff / (dist + 0.0001)) * ripple * falloff;
+          if (uInteractive > 0.5) {
+              vec2 diff = (uvCoord - uMouse);
+              float dist = length(diff);
+              float falloff = exp(-dist * 20.0);
+              float ripple = sin(10.0 * dist - uTime * 2.0) * 0.03;
+              uv += (diff / (dist + 0.0001)) * ripple * falloff;
+          }
 
           vec3 color = uBaseColor / abs(sin(uTime - uv.y - uv.x));
           return vec4(color, 1.0);
@@ -93,7 +99,8 @@ export const LiquidChrome = ({
         uAmplitude: { value: amplitude },
         uFrequencyX: { value: frequencyX },
         uFrequencyY: { value: frequencyY },
-        uMouse: { value: new Float32Array([0, 0]) }
+        uMouse: { value: new Float32Array([0, 0]) },
+        uInteractive: { value: interactive ? 1.0 : 0.0 }
       }
     });
     const mesh = new Mesh(gl, { geometry, program });

@@ -176,7 +176,7 @@ export default function HomePage() {
       style={{ overflowY: 'auto', overflowX: 'hidden' }}
     >
       <FloatingButton />
-      {/* Interactive Background Canvas */}
+      {/* Ambient Background Canvas */}
       <CoolBackground />
 
       {/* Top Embedded Minimalist Header */}
