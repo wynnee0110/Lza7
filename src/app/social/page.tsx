@@ -21,7 +21,7 @@ const ICON_MAP: Record<string, IconType> = {
 
 function Page() {
   return (
-    <main className="portfolio-bg relative isolate overflow-y-auto [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none] min-h-[100svh] text-gray-800 dark:text-gray-300 pb-10 transition-colors duration-300">
+    <main className="portfolio-bg relative isolate overflow-y-auto [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none] min-h-[100svh] text-gray-800 dark:text-gray-300 pb-10">
       <CoolBackground />
       <Header pageTitle="social & profiles" />
 

@@ -22,9 +22,9 @@ export const LiquidChrome = ({
     if (!containerRef.current) return;
 
     const container = containerRef.current;
-    const renderer = new Renderer({ antialias: true });
+    const renderer = new Renderer({ antialias: true, alpha: true });
     const gl = renderer.gl;
-    gl.clearColor(1, 1, 1, 1);
+    gl.clearColor(0, 0, 0, 0);
 
     const vertexShader = `
       attribute vec2 position;
@@ -159,9 +159,13 @@ export const LiquidChrome = ({
       program.uniforms.uTime.value = t * 0.001 * speed;
       renderer.render({ scene: mesh });
     }
-    animationId = requestAnimationFrame(update);
+
+    // Pre-render the first frame so the canvas is fully drawn before attaching to the DOM
+    program.uniforms.uTime.value = 0;
+    renderer.render({ scene: mesh });
 
     container.appendChild(gl.canvas);
+    animationId = requestAnimationFrame(update);
 
     return () => {
       cancelAnimationFrame(animationId);

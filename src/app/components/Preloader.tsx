@@ -7,15 +7,19 @@ interface PreloaderProps {
 }
 
 export default function Preloader({ minMs = 400 }: PreloaderProps) {
-  const [mounted, setMounted] = useState(true);
+  const [mounted, setMounted] = useState(false);
   const [fading, setFading] = useState(false);
 
   useEffect(() => {
-    // Skip preloader for sub-routes
-    if (typeof window !== "undefined" && window.location.pathname !== "/") {
-      setMounted(false);
+    // Only show preloader on first visit to root ("/") in the current browser session
+    if (typeof window === "undefined") return;
+
+    if (window.location.pathname !== "/" || sessionStorage.getItem("portfolio_preloaded")) {
       return;
     }
+
+    sessionStorage.setItem("portfolio_preloaded", "1");
+    setMounted(true);
 
     const start = performance.now();
 
@@ -41,8 +45,9 @@ export default function Preloader({ minMs = 400 }: PreloaderProps) {
 
   return (
     <div
-      className={`fixed inset-0 z-[9999] flex flex-col items-center justify-center bg-white dark:bg-[#0a0a0c] text-gray-900 dark:text-white font-mono select-none transition-opacity duration-300 ease-out will-change-[opacity] ${fading ? "opacity-0 pointer-events-none" : "opacity-100"
-        }`}
+      className={`fixed inset-0 z-[9999] flex flex-col items-center justify-center bg-[#ffffff] dark:bg-[#161618] text-gray-900 dark:text-white font-mono select-none transition-opacity duration-300 ease-out will-change-[opacity] ${
+        fading ? "opacity-0 pointer-events-none" : "opacity-100"
+      }`}
     >
       <div className="flex flex-col items-center gap-3">
         {/* Minimal Sharp Pulse Indicator */}
@@ -53,7 +58,6 @@ export default function Preloader({ minMs = 400 }: PreloaderProps) {
         {/* Minimalist Status Text */}
         <div className="flex items-center gap-1.5 text-xs text-gray-500 dark:text-gray-400">
           <span className="font-semibold text-gray-900 dark:text-white">Wayne Obial</span>
-
         </div>
       </div>
     </div>

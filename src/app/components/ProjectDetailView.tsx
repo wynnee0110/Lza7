@@ -77,7 +77,7 @@ export default function ProjectDetailView({
   };
 
   return (
-    <main className="portfolio-bg relative isolate min-h-[100svh] text-gray-800 dark:text-gray-200 transition-colors duration-300">
+    <main className="portfolio-bg relative isolate min-h-[100svh] text-gray-800 dark:text-gray-200">
       <CoolBackground />
 
       {/* Top Header Pill Navigation */}

@@ -172,7 +172,7 @@ export default function HomePage() {
 
   return (
     <main
-      className="portfolio-bg relative isolate min-h-[100svh] text-gray-800 dark:text-gray-200 transition-colors duration-300 flex flex-col items-center justify-start"
+      className="portfolio-bg relative isolate min-h-[100svh] text-gray-800 dark:text-gray-200 flex flex-col items-center justify-start"
       style={{ overflowY: 'auto', overflowX: 'hidden' }}
     >
       <FloatingButton />
@@ -218,30 +218,27 @@ export default function HomePage() {
               onClick={() => switchTab(tab.id)}
               aria-keyshortcuts={tab.shortcut}
               title={`Press ${tab.shortcut} to switch to ${tab.label}`}
-              className={`group flex items-center justify-end gap-2 text-right transition-all duration-150 cursor-pointer ${
-                isActive
+              className={`group flex items-center justify-end gap-2 text-right transition-all duration-150 cursor-pointer ${isActive
                   ? "text-gray-950 dark:text-white font-bold tracking-tight"
                   : "text-gray-600 dark:text-gray-300 hover:text-gray-950 dark:hover:text-white"
-              }`}
+                }`}
             >
               <span
-                className={`font-mono text-xs transition-all duration-150 ${
-                  isPressed
+                className={`font-mono text-xs transition-all duration-150 ${isPressed
                     ? "scale-125 text-gray-950 dark:text-white font-bold"
                     : isActive
-                    ? "text-gray-950 dark:text-white font-bold"
-                    : "text-gray-400 dark:text-gray-500 group-hover:text-gray-950 dark:group-hover:text-white"
-                }`}
+                      ? "text-gray-950 dark:text-white font-bold"
+                      : "text-gray-400 dark:text-gray-500 group-hover:text-gray-950 dark:group-hover:text-white"
+                  }`}
               >
                 {tab.shortcut}
               </span>
               <span className="tracking-wide">{tab.label}</span>
               <span
-                className={`transition-all duration-200 ${
-                  isActive
+                className={`transition-all duration-200 ${isActive
                     ? "w-3 sm:w-4 h-0.5 bg-gray-950 dark:bg-white"
                     : "w-1.5 h-0.5 bg-gray-400 dark:bg-gray-500 group-hover:w-2.5 group-hover:bg-gray-900 dark:group-hover:bg-gray-200"
-                }`}
+                  }`}
               />
             </button>
           );
@@ -404,20 +401,18 @@ export default function HomePage() {
                     onClick={() => switchTab(tab.id)}
                     aria-keyshortcuts={tab.shortcut}
                     title={`Press ${tab.shortcut} to switch to ${tab.label}`}
-                    className={`group relative flex items-center gap-1.5 px-2.5 py-2 text-xs font-mono transition-all duration-150 shrink-0 select-none cursor-pointer ${
-                      isActive
+                    className={`group relative flex items-center gap-1.5 px-2.5 py-2 text-xs font-mono transition-all duration-150 shrink-0 select-none cursor-pointer ${isActive
                         ? "text-gray-950 dark:text-white font-bold"
                         : "text-gray-600 dark:text-gray-300 hover:text-gray-950 dark:hover:text-white"
-                    }`}
+                      }`}
                   >
                     <span
-                      className={`font-mono text-xs transition-all duration-150 ${
-                        isPressed
+                      className={`font-mono text-xs transition-all duration-150 ${isPressed
                           ? "scale-125 text-gray-950 dark:text-white font-bold"
                           : isActive
-                          ? "text-gray-950 dark:text-white font-bold"
-                          : "text-gray-400 dark:text-gray-500 group-hover:text-gray-950 dark:group-hover:text-white"
-                      }`}
+                            ? "text-gray-950 dark:text-white font-bold"
+                            : "text-gray-400 dark:text-gray-500 group-hover:text-gray-950 dark:group-hover:text-white"
+                        }`}
                     >
                       {tab.shortcut}
                     </span>
